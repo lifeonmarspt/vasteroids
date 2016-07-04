@@ -1,12 +1,12 @@
 Vasteroids.Asteroid = (function () {
   var create = function () {
     var material = new THREE.MeshPhongMaterial( {
-					color: 0x000000,
-					emissive: 0xa8a190,
-          shininess: 7.5,
-					side: THREE.DoubleSide,
-					shading: THREE.FlatShading
-				} );
+      color: 0x000000,
+      emissive: 0xa8a190,
+      shininess: 7.5,
+      side: THREE.DoubleSide,
+      shading: THREE.FlatShading
+    });
 
     var clumps = [];
 
@@ -18,20 +18,25 @@ Vasteroids.Asteroid = (function () {
       var geometry = new AsteroidGeometry(radius, 10, 10);
       var asteroid = new THREE.Mesh(geometry, material);
 
-      asteroid.position.x = Vasteroids.Utils.randomInRange(-1.5*radius, 1.5*radius);
-      asteroid.position.y = Vasteroids.Utils.randomInRange(-1.5*radius, 1.5*radius);
-      asteroid.position.z = Vasteroids.Utils.randomInRange(-1.5*radius, 1.5*radius);
+      asteroid.position.x = _.random(-1.5*radius, 1.5*radius, true);
+      asteroid.position.y = _.random(-1.5*radius, 1.5*radius, true);
+      asteroid.position.z = _.random(-1.5*radius, 1.5*radius, true);
 
       clumps.push(asteroid);
     }
 
     var object3D = new THREE.Object3D();
-    for (var i = 0; i < clumps.length; i++) {
-      object3D.add(clumps[i]);
-    }
+    _.each(clumps, function (clump) { object3D.add(clump); });
 
     var coeff = 0.001+0.03*Math.random();
-    return { mesh: object3D, rotations: [coeff*Math.random(), coeff*Math.random(), coeff*Math.random()] };
+    return {
+      mesh: object3D,
+      rotations: [
+        coeff*Math.random(),
+        coeff*Math.random(),
+        coeff*Math.random()
+      ]
+    };
   };
 
   var rotate = function (asteroid) {
