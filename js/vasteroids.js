@@ -2,7 +2,10 @@ var Vasteroids = (function () {
   var scene,
       camera,
       renderer,
-      controls;
+      controls,
+      effect,
+      sceneOrtho,
+      cameraOrtho;
 
   var asteroids = [];
 
@@ -52,6 +55,34 @@ var Vasteroids = (function () {
     );
 
     controls = new THREE.DeviceOrientationControls(camera);
+
+    effect = new THREE.StereoEffect(renderer);
+    effect.setSize(window.innerWidth, window.innerHeight);
+
+    cameraOrtho = new THREE.OrthographicCamera(
+        - window.innerWidth / 2, window.innerWidth / 2,
+        window.innerHeight / 2, - window.innerHeight / 2,
+        1, 10);
+
+    cameraOrtho.position.z = 10;
+
+    sceneOrtho = new THREE.Scene();
+
+    var textureLoader = new THREE.TextureLoader();
+
+    textureLoader.load( "crosshair.png", function(texture) {
+      var material = new THREE.SpriteMaterial({ map: texture });
+
+      var width = material.map.image.width;
+      var height = material.map.image.height;
+
+      spriteTL = new THREE.Sprite(material);
+      spriteTL.scale.set(width, height, 1);
+      sceneOrtho.add(spriteTL);
+
+      spriteTL.position.set( - window.innerWidth + width,   window.innerHeight - height, 1 ); // top left
+
+    });
   };
 
   var renderCycle = function () {
@@ -60,7 +91,8 @@ var Vasteroids = (function () {
     controls.update();
     _.each(asteroids, Vasteroids.Asteroid.move);
 
-    renderer.render(scene, camera);
+    effect.render(sceneOrtho, cameraOrtho);
+    effect.render(scene, camera);
   };
 
   var run = function () {
