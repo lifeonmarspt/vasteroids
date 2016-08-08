@@ -1,5 +1,5 @@
 Vasteroids.Asteroid = (function () {
-  var create = function () {
+  var create = function (longitude, latitude, distance) {
     var material = new THREE.MeshPhongMaterial( {
       color: 0x000000,
       emissive: 0xa8a190,
@@ -29,24 +29,39 @@ Vasteroids.Asteroid = (function () {
     _.each(clumps, function (clump) { object3D.add(clump); });
 
     var coeff = 0.001+0.03*Math.random();
+
     return {
       mesh: object3D,
       rotations: [
         coeff*Math.random(),
         coeff*Math.random(),
         coeff*Math.random()
-      ]
+      ],
+
+      distance: distance,
+      longitude: longitude,
+      latitude: latitude
     };
   };
 
-  var rotate = function (asteroid) {
+  var move = function(asteroid) {
+    asteroid.distance -= 0.1;
+
     asteroid.mesh.rotateX(asteroid.rotations[0]);
     asteroid.mesh.rotateY(asteroid.rotations[1]);
     asteroid.mesh.rotateZ(asteroid.rotations[2]);
+
+    asteroid.mesh.position.set(
+      asteroid.distance * Math.sin(asteroid.longitude),
+      asteroid.distance * Math.sin(asteroid.latitude),
+      asteroid.distance * Math.cos(asteroid.longitude)
+    );
+
+    asteroid.mesh.updateMatrix();
   };
 
   return {
     create : create,
-    rotate : rotate
+    move: move
   }
 }());

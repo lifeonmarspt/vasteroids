@@ -1,7 +1,8 @@
 var Vasteroids = (function () {
   var scene,
       camera,
-      renderer;
+      renderer,
+      controls;
 
   var asteroids = [];
 
@@ -15,9 +16,14 @@ var Vasteroids = (function () {
 
     // asteroids
     for (var i = 0; i < 50; i++) {
-      var asteroid = Vasteroids.Asteroid.create();
-      asteroid.mesh.translateX(8*(i%8)-25);
-      asteroid.mesh.translateY(8*(i/8)-25);
+      var longitude = Math.random() * 2 * Math.PI;
+      var latitude = Math.random() * Math.PI / 2 - Math.PI / 4;
+
+      var asteroid = Vasteroids.Asteroid.create(longitude, latitude, 100.0);
+
+      asteroid.mesh.translateX(100 * Math.sin(longitude));
+      asteroid.mesh.translateY(100 * Math.sin(latitude));
+      asteroid.mesh.translateZ(100 * Math.cos(longitude));
       asteroids.push(asteroid);
       scene.add(asteroid.mesh);
     }
@@ -45,13 +51,14 @@ var Vasteroids = (function () {
       cameraOptions.clippingPlane.far
     );
 
-    camera.position.z = 50;
+    controls = new THREE.DeviceOrientationControls(camera);
   };
 
   var renderCycle = function () {
     requestAnimationFrame(renderCycle);
 
-    _.each(asteroids, Vasteroids.Asteroid.rotate);
+    controls.update();
+    _.each(asteroids, Vasteroids.Asteroid.move);
 
     renderer.render(scene, camera);
   };
