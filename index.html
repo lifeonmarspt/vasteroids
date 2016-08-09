@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html>
 <head>
@@ -8,12 +7,7 @@
   <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
 </head>
 <body>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.js"></script>
-  <script src="/js/aframe.min.js"></script>
-  <script src="/js/aframe-component-layout.js"></script>
-  <script src="/js/asteroidGeometry.js"></script>
-  <script src="/js/asteroidGeometryRegistration.js"></script>
+  <script src="bundle.js"></script>
   <a-scene>
     <a-entity id="layout" layout="type: circle; radius: 50" position="0 0 0">
       <a-entity position="0 2 -20" geometry="primitive: example; buffer: false; skipCache: true;" material="color: gray">
@@ -125,7 +119,6 @@
       ast.appendChild(animRot)
       scene.appendChild(ast);
     }, 2000)
-
   </script>
   </body>
 </html>
