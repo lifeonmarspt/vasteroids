@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "aframe": "git+https://github.com/aframevr/aframe.git",
+    "aframe-layout": "^1.0.2",
     "lodash": "^4.14.2",
     "three": "^0.79.0",
     "webpack": "^1.13.1"
@@ -12,6 +14,7 @@
     "babel-core": "^6.13.2",
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.13.2",
+    "source-map-loader": "^0.1.5",
     "webpack": "^1.13.1"
   },
   "scripts": {

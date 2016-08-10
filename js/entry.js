@@ -1,3 +1,3 @@
-import Vasteroids from './vasteroids.js';
-
-Vasteroids.run();
+require('aframe');
+require('aframe-layout');
+require('./asteroidGeometryRegistration.js');
