@@ -14,12 +14,14 @@
   <script src="/js/aframe-component-layout.js"></script>
   <script src="/js/asteroidGeometry.js"></script>
   <script src="/js/asteroidGeometryRegistration.js"></script>
+  <script src="/js/throwingAsteroidsAtYouTest.js"></script>
+
   <a-scene>
     <a-entity id="layout" layout="type: circle; radius: 50" position="0 0 0">
       <a-entity position="0 2 -20" geometry="primitive: example; buffer: false; skipCache: true;" material="color: gray">
         <a-animation dur="100000" attribute="position" fill="forwards" to="0 0 0"></a-animation>
         <a-animation attribute="rotation"
-        dur="100000"
+        dur="10000"
         fill="forwards"
         to="0 360 0"
         easing="linear"
@@ -28,17 +30,7 @@
       <a-entity position="0 2 -20" geometry="primitive: example; buffer: false;" material="color: gray">
         <a-animation dur="100000" attribute="position" fill="forwards" to="0 0 0"></a-animation>
         <a-animation attribute="rotation"
-        dur="100000"
-        fill="forwards"
-        to="0 360 0"
-        easing="linear"
-        repeat="indefinite"></a-animation>
-      </a-entity>
-
-      <a-entity position="0 2 -20" geometry="primitive: example; buffer: false;" material="color: gray">
-        <a-animation dur="100000" attribute="position" fill="forwards" to="0 0 0"></a-animation>
-        <a-animation attribute="rotation"
-        dur="100000"
+        dur="10000"
         fill="forwards"
         to="0 360 0"
         easing="linear"
@@ -48,7 +40,7 @@
       <a-entity position="0 2 -20" geometry="primitive: example; buffer: false;" material="color: gray">
         <a-animation dur="100000" attribute="position" fill="forwards" to="0 0 0"></a-animation>
         <a-animation attribute="rotation"
-        dur="100000"
+        dur="10000"
         fill="forwards"
         to="0 360 0"
         easing="linear"
@@ -58,7 +50,7 @@
       <a-entity position="0 2 -20" geometry="primitive: example; buffer: false;" material="color: gray">
         <a-animation dur="100000" attribute="position" fill="forwards" to="0 0 0"></a-animation>
         <a-animation attribute="rotation"
-        dur="100000"
+        dur="10000"
         fill="forwards"
         to="0 360 0"
         easing="linear"
@@ -68,7 +60,7 @@
       <a-entity position="0 2 -20" geometry="primitive: example; buffer: false;" material="color: gray">
         <a-animation dur="100000" attribute="position" fill="forwards" to="0 0 0"></a-animation>
         <a-animation attribute="rotation"
-        dur="100000"
+        dur="10000"
         fill="forwards"
         to="0 360 0"
         easing="linear"
@@ -78,7 +70,17 @@
       <a-entity position="0 2 -20" geometry="primitive: example; buffer: false;" material="color: gray">
         <a-animation dur="100000" attribute="position" fill="forwards" to="0 0 0"></a-animation>
         <a-animation attribute="rotation"
-        dur="100000"
+        dur="10000"
+        fill="forwards"
+        to="0 360 0"
+        easing="linear"
+        repeat="indefinite"></a-animation>
+      </a-entity>
+
+      <a-entity position="0 2 -20" geometry="primitive: example; buffer: false;" material="color: gray">
+        <a-animation dur="100000" attribute="position" fill="forwards" to="0 0 0"></a-animation>
+        <a-animation attribute="rotation"
+        dur="10000"
         fill="forwards"
         to="0 360 0"
         easing="linear"
@@ -88,7 +90,7 @@
 
     </a-entity>
     <a-camera position="0 0 0">
-      <a-entity cursor="fuse: true; fuseTimeout: 500"
+      <a-entity cursor
         position="0 0 -1"
         scale="0.05 0.05 0.05"
         geometry="primitive: ring"
@@ -97,35 +99,6 @@
     </a-camera>
     <a-sky color="#252243"></a-sky>
   </a-scene>
-  <script>
-    var i = 0
-    setInterval( () => {
-      ++i
-      var scene = document.querySelector('#layout');
-      var ast = document.createElement('a-entity');
-      ast.setAttribute('geometry', 'primitive: example; buffer: false; skipCache: true;');
-      ast.setAttribute('material', 'color: gray;');
 
-      var animRot = document.createElement('a-animation');
-      animRot.setAttribute('attribute', 'rotation')
-      animRot.setAttribute('dur', '1000')
-      animRot.setAttribute('fill', 'forwards')
-      animRot.setAttribute('to', '0 360 0')
-      animRot.setAttribute('easing', 'linear')
-      animRot.setAttribute('repeat', 'indefinite')
-
-      var animTrans = document.createElement('a-animation')
-      //<a-animation dur="100000" attribute="position" fill="forwards" to="0 0 0"></a-animation>
-      animTrans.setAttribute('dur', '10000')
-      animTrans.setAttribute('attribute', 'position')
-      animTrans.setAttribute('fill', 'forwards')
-      animTrans.setAttribute('to', '0 0 0')
-
-      ast.appendChild(animTrans)
-      ast.appendChild(animRot)
-      scene.appendChild(ast);
-    }, 2000)
-
-  </script>
   </body>
 </html>
