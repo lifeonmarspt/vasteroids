@@ -1,4 +1,6 @@
 require('aframe');
 require('aframe-layout');
-require('./asteroidComponentRegistration.js');
+require('./asteroid-component.js');
 require('./throwingAsteroidsAtYouTest.js');
+require('./laser-component.js')
+require('./spawner-component.js')

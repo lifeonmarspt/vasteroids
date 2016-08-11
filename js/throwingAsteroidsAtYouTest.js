@@ -9,7 +9,7 @@
           });
         }
       });
-      setInterval( () => {
+      setTimeout( () => {
       ++i
 
       var scene = document.querySelector('#layout');

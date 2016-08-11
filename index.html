@@ -10,12 +10,19 @@
 
   <script src="bundle.js"></script>
   <a-scene>
+
+    <a-assets>
+      <a-mixin id="laser"
+                 geometry="primitive: box; height: 2; width: 0.1; depth: 0.1"
+                 material="color: yellow;"
+                 laser collider></a-mixin>
+    </a-assets>
     <a-entity id="layout" layout="type: circle; radius: 50" position="0 0 0">
 
-
     </a-entity>
-    <a-camera id="player" position="0 0 -5">
-      <a-entity cursor
+    <a-camera id="player" position="0 0 -5" spawner="mixin: laser; on: mousedown">
+      <a-entity
+        cursor="fuse: false;"
         position="0 0 -1"
         scale="0.05 0.05 0.05"
         geometry="primitive: ring"
