@@ -1,6 +1,6 @@
 import AsteroidGeometry from "./asteroidGeometry.js";
 import AFRAME from 'aframe';
-import _ from 'underscore'
+import _ from 'lodash'
 
 
 AFRAME.registerComponent('asteroid', {
