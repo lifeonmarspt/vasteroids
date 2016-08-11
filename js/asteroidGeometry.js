@@ -1,4 +1,5 @@
-import THREE from 'three';
+import AFRAME from 'aframe';
+var THREE = AFRAME.THREE
 
 class AsteroidGeometry extends THREE.BufferGeometry {
   constructor(radius, widthSegments, heightSegments, phiLength, thetaLength) {

@@ -1,3 +1,4 @@
 require('aframe');
 require('aframe-layout');
-require('./asteroidGeometryRegistration.js');
+require('./asteroidComponentRegistration.js');
+require('./throwingAsteroidsAtYouTest.js');

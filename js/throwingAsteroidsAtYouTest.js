@@ -11,11 +11,12 @@
       });
       setInterval( () => {
       ++i
+
       var scene = document.querySelector('#layout');
       var ast = document.createElement('a-entity');
-      ast.setAttribute('geometry', 'primitive: example; buffer: false; skipCache: true;');
-      ast.setAttribute('material', 'color: gray;');
-      ast.setAttribute('click-color-change', 'yes?')
+      ast.setAttribute('asteroid', true);
+      ast.setAttribute("position", '0 0 -50')
+      ast.setAttribute('click-color-change', true)
 
       var animRot = document.createElement('a-animation');
       animRot.setAttribute('attribute', 'rotation')

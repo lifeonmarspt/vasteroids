@@ -7,7 +7,7 @@
     "aframe": "git+https://github.com/aframevr/aframe.git",
     "aframe-layout": "^1.0.2",
     "lodash": "^4.14.2",
-    "three": "^0.79.0",
+    "underscore": "^1.8.3",
     "webpack": "^1.13.1"
   },
   "devDependencies": {
