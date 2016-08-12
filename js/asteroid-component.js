@@ -36,7 +36,13 @@ AFRAME.registerComponent('asteroid', {
     _.each(clumps, function (clump) { object3D.add(clump); });
 
     el.setObject3D('mesh', object3D);
+    el.addEventListener("hit", () => {
+      this.explode()
+    }, false);
 
+  },
+  explode: function() {
+    //http://threejs.org/examples/webgl_modifier_tessellation.html ??
   }
 });
 
