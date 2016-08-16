@@ -29,6 +29,7 @@ AFRAME.registerComponent('spawner', {
 
     entity.setAttribute('laser', true);
     entity.setAttribute('collider', true);
+    entity.setAttribute('distance-limiter', true);
 
     this.el.sceneEl.appendChild(entity);
     window.laser = entity;

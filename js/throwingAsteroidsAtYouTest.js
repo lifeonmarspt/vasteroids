@@ -2,6 +2,7 @@ setInterval(() => {
   var scene = document.querySelector('#layout');
   var ast = document.createElement('a-entity');
   ast.setAttribute('asteroid', true);
+  ast.setAttribute('distance-limiter', "maxDistance: 100");
   ast.setAttribute("position", '0 0 -50');
 
   var animRot = document.createElement('a-animation');
