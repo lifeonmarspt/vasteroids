@@ -1,17 +1,13 @@
 import AFRAME from "aframe"
 
 AFRAME.registerComponent('collider', {
-  schema: {},
-
-  init: function() {
-    console.log("init collider")
+  schema: {
+    targetSet: { type: 'selector' }
   },
 
   tick: function() {
-    this.update()
-  },
+    var collisions = [];
 
-  update: function() {
 
     var sceneEl = this.el.sceneEl;
     var mesh = this.el.getObject3D('mesh');
@@ -21,29 +17,22 @@ AFRAME.registerComponent('collider', {
     if (geometry instanceof AFRAME.THREE.BufferGeometry)
       geometry = new THREE.Geometry().fromBufferGeometry( geometry );
 
-    if (geometry.vertices)
-    {
-      for (var vertexIndex = 0; vertexIndex < geometry.vertices.length; vertexIndex++)
-      {
+    if (geometry.vertices) {
+      for (var vertexIndex = 0; vertexIndex < geometry.vertices.length; vertexIndex++) {
         var localVertex = geometry.vertices[vertexIndex].clone();
-        var globalVertex = localVertex.applyMatrix4( object3D.matrix );
-        var directionVector = globalVertex.sub( object3D.position );
+        var globalVertex = localVertex.applyMatrix4( object3D.matrix);
+        var directionVector = globalVertex.sub(object3D.position);
 
-        var ray = new THREE.Raycaster( originPoint, directionVector.clone().normalize() );
-        var collisionResults = ray.intersectObjects( sceneEl.object3D.children, true );
+        var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize(), 0, directionVector.length());
+        var collisionResults = ray.intersectObjects( this.data.targetSet.object3D.children, true );
         collisionResults.forEach(collision => {
-          if (collision.object === object3D)
-          {
-            return;
-          }
-          if (collision.distance < directionVector.length())
-          {
-            if (!collision.object.el) { return; }
-            console.log("we got one")
-            collision.object.el.emit('hit');
+          if (collision.distance < directionVector.length()) {
+            collisions.push(collision.object.el);
           };
-        })
+        });
       }
     }
+
+    [...new Set(collisions)].forEach(obj => { obj.emit('hit'); });
   }
 });

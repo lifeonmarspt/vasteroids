@@ -28,7 +28,7 @@ AFRAME.registerComponent('spawner', {
     entity.setAttribute('rotation', camRot);
 
     entity.setAttribute('laser', true);
-    entity.setAttribute('collider', true);
+    entity.setAttribute('collider', "targetSet: #asteroids");
     entity.setAttribute('distance-limiter', true);
 
     this.el.sceneEl.appendChild(entity);
