@@ -8,6 +8,7 @@ AFRAME.registerComponent('collider', {
   tick: function() {
     var collisions = [];
 
+    this.el.object3D.updateMatrix();
 
     var sceneEl = this.el.sceneEl;
     var mesh = this.el.getObject3D('mesh');
