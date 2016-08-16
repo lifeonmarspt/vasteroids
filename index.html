@@ -1,36 +1,28 @@
 <!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+  </head>
+  <body>
+    <script src="bundle.js"></script>
+    <a-scene>
+      <a-sky color="#252243"></a-sky>
 
-  <script src="bundle.js"></script>
-  <a-scene>
-
-    <a-assets>
-      <a-mixin id="laser"
-                 geometry="primitive: box; height: 2; width: 0.1; depth: 0.1"
-                 material="color: yellow;"
-                 laser collider></a-mixin>
-    </a-assets>
-    <a-entity id="layout" layout="type: circle; radius: 50" position="0 0 0">
-
-    </a-entity>
-    <a-camera id="player" position="0 0 -5" spawner="mixin: laser; on: mousedown">
-      <a-entity
-        cursor="fuse: false;"
-        position="0 0 -1"
-        scale="0.05 0.05 0.05"
-        geometry="primitive: ring"
-        material="color: black; shader: flat">
+      <a-entity id="layout" layout="type: circle; radius: 50" position="0 0 0">
       </a-entity>
-    </a-camera>
-    <a-sky color="#252243"></a-sky>
-  </a-scene>
 
+      <a-camera id="player" position="0 0 -50" spawner="mixin: laser; on: mousedown">
+        <a-entity
+          cursor="fuse: false;"
+          position="0 0 -1"
+          scale="0.05 0.05 0.05"
+          geometry="primitive: ring"
+          material="color: black; shader: flat">
+        </a-entity>
+      </a-camera>
+    </a-scene>
   </body>
 </html>

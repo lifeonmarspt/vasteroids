@@ -6,26 +6,21 @@ AFRAME.registerComponent('spawner', {
     mixin: { default: '' }
   },
 
-  update: function () {
+  update: function (oldData) {
+    if (this.data.on === oldData.on) { return; }
 
-    var el = this.el;
     var spawn = this.spawn.bind(this);
 
-    if (this.on === this.data.on) { return; }
-
-    el.removeEventListener(this.on, spawn);
-    el.addEventListener(this.data.on, spawn);
-
-    this.on = this.data.on;
+    this.el.removeEventListener(oldData.on, spawn);
+    this.el.addEventListener(this.data.on, spawn);
   },
 
   spawn: function () {
     console.log("click! spawn")
-    var el = this.el;
-    var matrixWorld = el.object3D.matrixWorld;
 
-    var camPos = document.getElementById('player').getAttribute('position');
-    var camRot = document.getElementById('player').getAttribute('rotation')
+    var camPos = this.el.getAttribute('position');
+    var camRot = this.el.getAttribute('rotation')
+
     var entity = document.createElement('a-entity');
 
     entity.setAttribute('geometry', "primitive: box; height: 0.1; width: 0.1; depth: 2");
@@ -35,9 +30,7 @@ AFRAME.registerComponent('spawner', {
     entity.setAttribute('laser', true);
     entity.setAttribute('collider', true);
 
-
-
-    window.laser = entity
-    el.sceneEl.appendChild(entity);
+    this.el.sceneEl.appendChild(entity);
+    window.laser = entity;
   }
 });

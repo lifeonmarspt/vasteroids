@@ -1,5 +1,4 @@
-setInterval( () => {
-
+setInterval(() => {
   var scene = document.querySelector('#layout');
   var ast = document.createElement('a-entity');
   ast.setAttribute('asteroid', true);
@@ -17,10 +16,9 @@ setInterval( () => {
   animTrans.setAttribute('dur', '10000');
   animTrans.setAttribute('attribute', 'position');
   animTrans.setAttribute('fill', 'forwards');
-  animTrans.setAttribute('to', '10 10 10');
+  animTrans.setAttribute('to', '0 0 0');
 
   ast.appendChild(animTrans);
   ast.appendChild(animRot);
   scene.appendChild(ast);
-  }, 2000)
-
+}, 5000);
