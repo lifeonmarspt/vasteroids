@@ -1,5 +1,4 @@
 setInterval(() => {
-  var scene = document.querySelector('#layout');
   var ast = document.createElement('a-entity');
   ast.setAttribute('asteroid', true);
   ast.setAttribute('distance-limiter', "maxDistance: 100");
@@ -17,9 +16,11 @@ setInterval(() => {
   animTrans.setAttribute('dur', '10000');
   animTrans.setAttribute('attribute', 'position');
   animTrans.setAttribute('fill', 'forwards');
+  animTrans.setAttribute('easing', 'linear');
   animTrans.setAttribute('to', '0 0 0');
 
   ast.appendChild(animTrans);
   ast.appendChild(animRot);
-  scene.appendChild(ast);
-}, 5000);
+
+  document.querySelector('#asteroids').appendChild(ast);
+}, 2000);
