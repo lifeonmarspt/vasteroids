@@ -16,8 +16,6 @@ AFRAME.registerComponent('spawner', {
   },
 
   spawn: function () {
-    console.log("click! spawn")
-
     var camPos = this.el.getAttribute('position');
     var camRot = this.el.getAttribute('rotation')
 

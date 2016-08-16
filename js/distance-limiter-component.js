@@ -9,7 +9,6 @@ AFRAME.registerComponent('distance-limiter', {
   tick: function () {
     if (this.el.object3D.position.length() > this.data.maxDistance ||
         this.el.object3D.position.length() < this.data.minDistance) {
-      console.log("removing element");
       this.el.parentNode.removeChild(this.el);
     }
   }

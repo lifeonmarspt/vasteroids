@@ -42,6 +42,8 @@ AFRAME.registerComponent('asteroid', {
 
   },
   explode: function() {
+    console.log("poof!");
+    this.el.parentNode.removeChild(this.el);
     //http://threejs.org/examples/webgl_modifier_tessellation.html ??
   }
 });
