@@ -23,6 +23,7 @@ setInterval(() => {
   ast.setAttribute('asteroid', true);
   ast.setAttribute('distance-limiter', "maxDistance: 100");
   ast.setAttribute("position", polar2cartesian(longitude, latitude, 50.0));
+  ast.setAttribute('sound', "src: #explosion-sound; on: hit");
 
   var animRot = document.createElement('a-animation');
   animRot.setAttribute('attribute', 'rotation');

@@ -36,7 +36,7 @@ AFRAME.registerComponent('asteroid', {
     _.each(clumps, function (clump) { object3D.add(clump); });
 
     el.setObject3D('mesh', object3D);
-    el.addEventListener("hit", () => {
+    el.addEventListener("sound-ended", () => {
       this.explode()
     }, false);
 
