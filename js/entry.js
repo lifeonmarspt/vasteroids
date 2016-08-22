@@ -5,4 +5,6 @@ require('./distance-limiter-component.js');
 require('./throwingAsteroidsAtYouTest.js');
 require('./laser-component.js');
 require('./spawner-component.js');
+require('./explode-modifier.js');
+require('./tesselate-modifier.js');
 require('./collider.js');

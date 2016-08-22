@@ -34,6 +34,11 @@ AFRAME.registerComponent('collider', {
       }
     }
 
-    [...new Set(collisions)].forEach(obj => { obj.emit('hit'); });
+    [...new Set(collisions)].forEach(obj => {
+      obj.emit('hit');
+    });
+    if (collisions.length > 0) {
+      this.el.parentNode.removeChild(this.el);
+    }
   }
 });

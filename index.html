@@ -9,7 +9,7 @@
   <body>
     <script src="bundle.js"></script>
     <a-scene>
-      <a-sky color="#252243"></a-sky>
+      <a-sky src="wormhole_space_equirectangular_skybox_by_likeonions-d9pk0bb.jpg"></a-sky>
 
       <a-entity id="asteroids">
       </a-entity>
@@ -24,5 +24,48 @@
         </a-entity>
       </a-camera>
     </a-scene>
+
+    <script type="x-shader/x-vertex" id="vertexshader">
+
+      uniform float amplitude;
+
+      attribute vec3 customColor;
+      attribute vec3 displacement;
+
+      varying vec3 vNormal;
+      varying vec3 vColor;
+
+      void main() {
+
+        vNormal = normal;
+        vec3 newPosition = position + normal * amplitude * displacement;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4( newPosition, 1.0 );
+
+      }
+
+    </script>
+
+    <script type="x-shader/x-fragment" id="fragmentshader">
+
+      uniform float opacity;
+
+      varying vec3 vNormal;
+      varying vec3 vColor;
+      varying vec4 otherColor;
+
+      void main() {
+
+        const float ambient = 0.4;
+        vec3 light = vec3( 1.0 );
+        light = normalize( light );
+
+        float directional = max( dot( vNormal, light ), 0.0 );
+
+        gl_FragColor = vec4( vColor, opacity );
+
+      }
+
+    </script>
+
   </body>
 </html>

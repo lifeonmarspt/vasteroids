@@ -1,4 +1,4 @@
-setInterval(() => {
+document.getElementsByTagName('body')[0].addEventListener('keydown', () => {
   var ast = document.createElement('a-entity');
   ast.setAttribute('asteroid', true);
   ast.setAttribute('distance-limiter', "maxDistance: 100");
@@ -23,4 +23,4 @@ setInterval(() => {
   ast.appendChild(animRot);
 
   document.querySelector('#asteroids').appendChild(ast);
-}, 2000);
+});
