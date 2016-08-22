@@ -28,6 +28,7 @@ AFRAME.registerComponent('spawner', {
     entity.setAttribute('laser', true);
     entity.setAttribute('collider', "targetSet: #asteroids");
     entity.setAttribute('distance-limiter', true);
+    entity.setAttribute('sound', "src: #laser-sound; autoplay: true");
 
     this.el.sceneEl.appendChild(entity);
     window.laser = entity;
