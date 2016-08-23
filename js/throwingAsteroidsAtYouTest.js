@@ -22,6 +22,8 @@ setInterval(() => {
   var ast = document.createElement('a-entity');
   ast.setAttribute('asteroid', true);
   ast.setAttribute('distance-limiter', "maxDistance: 100");
+  ast.setAttribute('geometry', 'primitive: asteroid-geometry; skipCache: true; buffer: false;')
+  ast.setAttribute('material', 'shader: asteroid-explosion;');
   ast.setAttribute("position", polar2cartesian(longitude, latitude, 50.0));
   ast.setAttribute('sound', "src: #explosion-sound; on: hit");
 
@@ -43,6 +45,7 @@ setInterval(() => {
   ast.appendChild(animTrans);
   ast.appendChild(animRot);
 
+
   document.querySelector('#asteroids').appendChild(ast);
-}, 2000);
+}, 200);
 

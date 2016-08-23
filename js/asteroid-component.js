@@ -1,15 +1,13 @@
 import AsteroidGeometry from "./asteroidGeometry.js";
 import AFRAME from 'aframe';
-import _ from 'lodash'
+import _ from 'lodash';
 
-function setupExplosion(bufferGeometry) {
+function setupExplosion(geometry) {
 
-  //todo: just count buffergeometry's face length instead of this
 
-  var geometry = new THREE.Geometry().fromBufferGeometry(bufferGeometry);
   var numFaces = geometry.faces.length;
-  //geometry = new THREE.BufferGeometry().fromGeometry(geometry);
-  geometry = bufferGeometry
+  geometry = new THREE.BufferGeometry().fromGeometry(geometry);
+
 
   var displacement = new Float32Array( numFaces * 3 * 3 );
 
@@ -24,10 +22,50 @@ function setupExplosion(bufferGeometry) {
     }
   }
 
-  geometry.addAttribute( 'displacement', new THREE.BufferAttribute( displacement, 3 ) );
-
   return geometry
+
 }
+
+
+AFRAME.registerGeometry('asteroid-geometry', {
+  init: function() {
+    var clumps = [];
+    var firstGeometry = new AsteroidGeometry(1.0+0.5*Math.random(), 10, 10)
+
+
+
+    clumps.push(new THREE.Mesh(firstGeometry));
+
+    for (var i = 0; i < 2+Math.random()*10; i++) {
+
+      var radius = 1.1 + 0.5*Math.random();
+      var geometry = new AsteroidGeometry(radius, 10, 10);
+
+      var asteroid = new THREE.Mesh(geometry);
+
+      asteroid.position.x = _.random(-1.5*radius, 1.5*radius, true);
+      asteroid.position.y = _.random(-1.5*radius, 1.5*radius, true);
+      asteroid.position.z = _.random(-1.5*radius, 1.5*radius, true);
+
+      clumps.push(asteroid);
+    }
+
+    var finalGeometry = new THREE.Geometry();
+    _.each(clumps, function (clumpMesh) {
+      clumpMesh.updateMatrix()
+      clumpMesh.geometry = new THREE.Geometry().fromBufferGeometry(clumpMesh.geometry)
+      finalGeometry.merge(clumpMesh.geometry, clumpMesh.matrix)
+    });
+
+    finalGeometry = setupExplosion(finalGeometry)
+    this.geometry = finalGeometry;
+  }
+})
+
+
+
+
+
 
 AFRAME.registerComponent('asteroid', {
   init: function() {
@@ -46,49 +84,20 @@ AFRAME.registerComponent('asteroid', {
         amplitude: { value: 0.0 },
         opacity: { value: 1.0 }
 
-      };
+    };
 
-      var shaderMaterial = new THREE.ShaderMaterial( {
+    var shaderMaterial = new THREE.ShaderMaterial( {
 
-        uniforms:       this.uniforms,
-        shading: THREE.FlatShading,
-        blending: THREE.SubtractiveBlending,
-        transparent: true,
-        opacity: 0.5,
-        alphaTest: 0.5,
-        side: THREE.FrontSide,
-        vertexShader:   document.getElementById( 'vertexshader' ).textContent,
-        fragmentShader: document.getElementById( 'fragmentshader' ).textContent
+      uniforms:       this.uniforms,
+      shading: THREE.FlatShading,
+      blending: THREE.SubtractiveBlending,
+      side: THREE.FrontSide,
+      vertexShader:   document.getElementById( 'vertexshader' ).textContent,
+      fragmentShader: document.getElementById( 'fragmentshader' ).textContent
+    });
 
 
-      });
-
-
-    var clumps = [];
-    var firstGeometry = new AsteroidGeometry(1.0+0.5*Math.random(), 10, 10)
-    firstGeometry = setupExplosion(firstGeometry)
-
-
-    clumps.push(new THREE.Mesh(firstGeometry, shaderMaterial));
-
-    for (var i = 0; i < 2+Math.random()*10; i++) {
-
-      var radius = 1.1 + 0.5*Math.random();
-      var geometry = new AsteroidGeometry(radius, 10, 10);
-      geometry = setupExplosion(geometry)
-      var asteroid = new THREE.Mesh(geometry, shaderMaterial);
-
-      asteroid.position.x = _.random(-1.5*radius, 1.5*radius, true);
-      asteroid.position.y = _.random(-1.5*radius, 1.5*radius, true);
-      asteroid.position.z = _.random(-1.5*radius, 1.5*radius, true);
-
-      clumps.push(asteroid);
-    }
-
-    var object3D = new THREE.Object3D();
-    _.each(clumps, function (clump) { object3D.add(clump); });
-
-    el.setObject3D('mesh', object3D);
+    el.object3D.updateMatrix();
     el.addEventListener("sound-ended", () => {
       this.explode()
     }, false);

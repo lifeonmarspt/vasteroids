@@ -1,5 +1,6 @@
 require('aframe');
 require('aframe-layout');
+require('./asteroid-explosion-shader.js');
 require('./asteroid-component.js');
 require('./distance-limiter-component.js');
 require('./throwingAsteroidsAtYouTest.js');
