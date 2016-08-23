@@ -26,6 +26,7 @@ AFRAME.registerComponent('collider', {
 
         var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize(), 0, directionVector.length());
         var collisionResults = ray.intersectObjects( this.data.targetSet.object3D.children, true );
+
         collisionResults.forEach(collision => {
           if (collision.distance < directionVector.length()) {
             collisions.push(collision.object.el);
@@ -34,10 +35,9 @@ AFRAME.registerComponent('collider', {
       }
     }
 
-    [...new Set(collisions)].forEach(obj => {
-      obj.emit('hit');
-    });
+    [...new Set(collisions)].forEach(obj => { obj.emit('hit'); });
     if (collisions.length > 0) {
+      console.log("removing laser")
       this.el.parentNode.removeChild(this.el);
     }
   }

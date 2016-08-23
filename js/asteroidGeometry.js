@@ -81,8 +81,8 @@ class AsteroidGeometry extends THREE.BufferGeometry {
         } else if (y == heightSegments - 1) {
           indices.push(
               vertices[y][x],
-              vertices[y][(x+1)%widthSegments],
-              vertices[y+1][0]);
+              vertices[y+1][0],
+              vertices[y][(x+1)%widthSegments]);
         } else {
           var v1 = vertices[ y ][ (x + 1) % widthSegments ];
           var v2 = vertices[ y ][ x ];

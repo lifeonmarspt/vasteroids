@@ -15,6 +15,7 @@ function polar2cartesian(longitude, latitude, radius) {
    }
 }
 
+
 setInterval(() => {
   var longitude = normal_random(2) * Math.PI * 2;
   var latitude = normal_random(10) * Math.PI/2 - Math.PI/4;
@@ -43,4 +44,5 @@ setInterval(() => {
   ast.appendChild(animRot);
 
   document.querySelector('#asteroids').appendChild(ast);
-});
+}, 2000);
+

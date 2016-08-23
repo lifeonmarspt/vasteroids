@@ -4,18 +4,12 @@ import _ from 'lodash'
 
 function setupExplosion(bufferGeometry) {
 
-  var geometry = new THREE.Geometry().fromBufferGeometry(bufferGeometry)
-  var tessellateModifier = new THREE.TessellateModifier( 8 );
+  //todo: just count buffergeometry's face length instead of this
 
-  for ( var i = 0; i < 6; i ++ ) {
-    tessellateModifier.modify( geometry );
-  }
-
-  (new THREE.ExplodeModifier()).modify( geometry );
-
+  var geometry = new THREE.Geometry().fromBufferGeometry(bufferGeometry);
   var numFaces = geometry.faces.length;
-
-  geometry = new THREE.BufferGeometry().fromGeometry( geometry );
+  //geometry = new THREE.BufferGeometry().fromGeometry(geometry);
+  geometry = bufferGeometry
 
   var displacement = new Float32Array( numFaces * 3 * 3 );
 
@@ -78,8 +72,8 @@ AFRAME.registerComponent('asteroid', {
     clumps.push(new THREE.Mesh(firstGeometry, shaderMaterial));
 
     for (var i = 0; i < 2+Math.random()*10; i++) {
-      var radius = 1.1 + 0.5*Math.random();
 
+      var radius = 1.1 + 0.5*Math.random();
       var geometry = new AsteroidGeometry(radius, 10, 10);
       geometry = setupExplosion(geometry)
       var asteroid = new THREE.Mesh(geometry, shaderMaterial);
