@@ -17,9 +17,10 @@
       </a-assets>
 
       <a-entity id="asteroids">
+        <a-entity start-button class="collidable" geometry='primitive: asteroid-geometry; skipCache: true; buffer: false;' position="0 0 -10" ></a-entity>
       </a-entity>
 
-      <a-camera id="player" position="0 0 -50" spawner="mixin: laser; on: mousedown">
+      <a-camera id="player" player position="0 0 -50" spawner="mixin: laser; on: mousedown">
         <a-entity
           cursor="fuse: false;"
           position="0 0 -1"
@@ -27,6 +28,7 @@
           geometry="primitive: ring"
           material="color: green; shader: flat">
         </a-entity>
+        <a-entity id="text" position="-1.5 0 -5" countdown-timer text="text: Shoot to start"></a-entity>
       </a-camera>
     </a-scene>
   </body>

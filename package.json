@@ -6,6 +6,7 @@
   "dependencies": {
     "aframe": "git+https://github.com/aframevr/aframe.git",
     "aframe-layout": "^1.0.2",
+    "aframe-text-component": "^0.3.0",
     "lodash": "^4.14.2",
     "webpack": "^1.13.1"
   },
