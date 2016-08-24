@@ -2,7 +2,7 @@ import AFRAME from 'aframe';
 
 AFRAME.registerShader('asteroid-explosion', {
   schema: {
-    opacity: {type: 'float', default: 1.0, is: 'uniform'},
+    opacity: {type: 'float', default: 0.0, is: 'uniform'},
     amplitude: {type: 'float', default: 0.0, is: 'uniform'},
     customColor: {type: 'vec3', default: "0.5 0.5 0.5", is: 'uniform'},
     displacement: {type: 'vec3', is: 'attribute'}
@@ -26,7 +26,7 @@ AFRAME.registerShader('asteroid-explosion', {
       vec3 light = vec3( 1.0 );
       light = normalize( light );
       float directional = max( dot( vNormal, light ), 0.0 );
-      gl_FragColor = vec4( customColor, 1.0 );
+      gl_FragColor = vec4( customColor, 1.0 ) + vec4(1.0 * opacity, 0.0, 0.0, 0.0);
     }`
 });
 

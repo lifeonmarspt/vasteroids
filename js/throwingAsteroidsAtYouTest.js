@@ -38,6 +38,14 @@ setInterval(() => {
   animTrans.setAttribute('to', '0 0 0');
   animTrans.setAttribute('end', 'hit');
 
+  var redness = document.createElement('a-animation');
+  redness.setAttribute('dur', '10000');
+  redness.setAttribute('attribute', 'material.opacity');
+  redness.setAttribute('fill', 'forwards');
+  redness.setAttribute('easing', 'linear');
+  redness.setAttribute('to', '1');
+  redness.setAttribute('end', 'hit');
+
   var explosion = document.createElement('a-animation');
   explosion.setAttribute('dur', '1000');
   explosion.setAttribute('attribute', 'material.amplitude');
@@ -49,6 +57,7 @@ setInterval(() => {
   ast.appendChild(animTrans);
   ast.appendChild(animRot);
   ast.appendChild(explosion);
+  ast.appendChild(redness);
 
   document.querySelector('#asteroids').appendChild(ast);
 }, 2000);
