@@ -4,6 +4,7 @@ import _ from 'lodash';
 function setupExplosion(geometry) {
   var numFaces = geometry.faces.length;
   geometry = new AFRAME.THREE.BufferGeometry().fromGeometry(geometry);
+  geometry.computeVertexNormals();
 
   var displacement = new Float32Array(numFaces * 9);
 
@@ -27,7 +28,7 @@ function distortedSphereGeometry(radius, widthSegments, heightSegments) {
 
     // don't touch the seams to avoid tearing
     if (y > 1 && y < heightSegments && (x % widthSegments) != 0) {
-      geometry.vertices[i].multiplyScalar(_.random(1, 1.5, true));
+      geometry.vertices[i].multiplyScalar(_.random(0.75, 1.5, true));
     }
   }
 
@@ -36,11 +37,11 @@ function distortedSphereGeometry(radius, widthSegments, heightSegments) {
 
 AFRAME.registerGeometry('asteroid-geometry', {
   init: function() {
-    var finalGeometry = distortedSphereGeometry(_.random(1.0, 1.5, true), 10, 10);
+    var finalGeometry = distortedSphereGeometry(_.random(1.0, 1.5, true), 20, 10);
 
     for (var i = 0; i < _.random(2, 12); i++) {
       var radius = _.random(1.0, 1.5, true);
-      var geometry = distortedSphereGeometry(radius, 10, 10);
+      var geometry = distortedSphereGeometry(radius, 20, 10);
 
       var x = radius * _.random(-1.5, 1.5, true);
       var y = radius * _.random(-1.5, 1.5, true);
@@ -56,6 +57,23 @@ AFRAME.registerGeometry('asteroid-geometry', {
 AFRAME.registerComponent('asteroid', {
   init: function() {
     this.el.object3D.updateMatrix();
+    this.hitListener = () => { this.explode(); };
+    this.el.addEventListener("hit", this.hitListener, false);
+  },
+
+  explode: function() {
+    console.log("boom!");
+    this.el.removeEventListener("hit", this.hitListener);
+    this.el.setAttribute("material", "shader: asteroid-explosion;");
+
+    var explosion = document.createElement('a-animation');
+    explosion.setAttribute('dur', '300');
+    explosion.setAttribute('attribute', 'material.amplitude');
+    explosion.setAttribute('fill', 'forwards');
+    explosion.setAttribute('easing', 'linear');
+    explosion.setAttribute('to', '0.8');
+
+    this.el.appendChild(explosion);
     this.el.addEventListener("animationend", () => { this.disappear(); }, false);
   },
 
