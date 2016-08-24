@@ -24,7 +24,7 @@ function start_asteroids() {
 
     var ast = document.createElement('a-entity');
     ast.setAttribute('asteroid', true);
-    ast.setAttribute('distance-limiter', "maxDistance: 100; minDistance: 10");
+    ast.setAttribute('distance-limiter', "maxDistance: 100");
     ast.setAttribute('geometry', 'primitive: asteroid-geometry; skipCache: true; buffer: false;')
     ast.setAttribute('material', 'metalness: 0;');
     ast.setAttribute("position", polar2cartesian(longitude, latitude, 50.0));
