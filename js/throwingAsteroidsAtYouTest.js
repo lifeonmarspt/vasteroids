@@ -34,6 +34,7 @@ setInterval(() => {
   animRot.setAttribute('to', '0 360 0');
   animRot.setAttribute('easing', 'linear');
   animRot.setAttribute('repeat', 'indefinite');
+  animRot.setAttribute('end', 'hit');
 
   var animTrans = document.createElement('a-animation');
   animTrans.setAttribute('dur', '10000');
@@ -41,11 +42,20 @@ setInterval(() => {
   animTrans.setAttribute('fill', 'forwards');
   animTrans.setAttribute('easing', 'linear');
   animTrans.setAttribute('to', '0 0 0');
+  animTrans.setAttribute('end', 'hit');
+
+  var explosion = document.createElement('a-animation');
+  explosion.setAttribute('dur', '1000');
+  explosion.setAttribute('attribute', 'material.amplitude');
+  explosion.setAttribute('fill', 'forwards');
+  explosion.setAttribute('easing', 'linear');
+  explosion.setAttribute('to', '1');
+  explosion.setAttribute('begin', 'hit');
 
   ast.appendChild(animTrans);
   ast.appendChild(animRot);
-
+  ast.appendChild(explosion);
 
   document.querySelector('#asteroids').appendChild(ast);
-}, 200);
+}, 2000);
 

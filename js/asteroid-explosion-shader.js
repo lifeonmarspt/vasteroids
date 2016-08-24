@@ -3,9 +3,9 @@ import AFRAME from 'aframe';
 AFRAME.registerShader('asteroid-explosion', {
   schema: {
     opacity: {type: 'float', default: 1.0, is: 'uniform'},
-    amplitude: {type: 'float', default: 100.0, is: 'uniform'},
+    amplitude: {type: 'float', default: 0.0, is: 'uniform'},
     customColor: {type: 'vec3', default: "0.5 0.5 0.5", is: 'uniform'},
-    displacement: {type: 'vec3'}
+    displacement: {type: 'vec3', is: 'attribute'}
   },
   vertexShader:
     `uniform float amplitude;

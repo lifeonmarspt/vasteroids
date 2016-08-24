@@ -3,11 +3,8 @@ import AFRAME from 'aframe';
 import _ from 'lodash';
 
 function setupExplosion(geometry) {
-
-
   var numFaces = geometry.faces.length;
   geometry = new THREE.BufferGeometry().fromGeometry(geometry);
-
 
   var displacement = new Float32Array( numFaces * 3 * 3 );
 
@@ -22,8 +19,8 @@ function setupExplosion(geometry) {
     }
   }
 
+  geometry.addAttribute( 'displacement', new THREE.BufferAttribute( displacement, 3 ) );
   return geometry
-
 }
 
 
@@ -31,8 +28,6 @@ AFRAME.registerGeometry('asteroid-geometry', {
   init: function() {
     var clumps = [];
     var firstGeometry = new AsteroidGeometry(1.0+0.5*Math.random(), 10, 10)
-
-
 
     clumps.push(new THREE.Mesh(firstGeometry));
 
@@ -62,68 +57,16 @@ AFRAME.registerGeometry('asteroid-geometry', {
   }
 })
 
-
-
-
-
-
 AFRAME.registerComponent('asteroid', {
   init: function() {
     var el = this.el;
 
-    var material = new THREE.MeshPhongMaterial( {
-      color: 0x000000,
-      emissive: 0xa8a190,
-      shininess: 7.5,
-      side: THREE.DoubleSide,
-      shading: THREE.FlatShading
-    });
-
-    this.uniforms = {
-
-        amplitude: { value: 0.0 },
-        opacity: { value: 1.0 }
-
-    };
-
-    var shaderMaterial = new THREE.ShaderMaterial( {
-
-      uniforms:       this.uniforms,
-      shading: THREE.FlatShading,
-      blending: THREE.SubtractiveBlending,
-      side: THREE.FrontSide,
-      vertexShader:   document.getElementById( 'vertexshader' ).textContent,
-      fragmentShader: document.getElementById( 'fragmentshader' ).textContent
-    });
-
-
     el.object3D.updateMatrix();
-    el.addEventListener("sound-ended", () => {
-      this.explode()
-    }, false);
-
+    el.addEventListener("animationend", () => { this.disappear(); }, false);
   },
-  explode: function() {
-    if (this.el === undefined)
-      return
 
+  disappear: function() {
     console.log("poof!");
-
-    //clear animations, which are children nodes
-    while (this.el.hasChildNodes())
-      this.el.removeChild(this.el.lastChild);
-
-    var clear = setInterval( () => {
-      this.uniforms.amplitude.value += 0.0075
-      this.uniforms.opacity.value -= 0.075
-
-      if (this.uniforms.opacity.value < 0 && this.el.parentNode) {
-        this.el.parentNode.removeChild(this.el);
-        clearTimeout(clear)
-      }
-    }, 25)
-
+    this.el.parentNode.removeChild(this.el);
   }
 });
-
-
