@@ -3,7 +3,6 @@ import AFRAME from 'aframe'
 AFRAME.registerComponent('spawner', {
   schema: {
     on: { default: 'click' },
-    mixin: { default: '' }
   },
 
   update: function (oldData) {
@@ -30,9 +29,6 @@ AFRAME.registerComponent('spawner', {
     entity.setAttribute('distance-limiter', true);
     entity.setAttribute('sound', "src: #laser-sound; autoplay: true");
 
-
-
     this.el.sceneEl.appendChild(entity);
-    window.laser = entity;
   }
 });

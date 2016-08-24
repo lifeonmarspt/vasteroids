@@ -6,21 +6,19 @@ function setupExplosion(geometry) {
   var numFaces = geometry.faces.length;
   geometry = new THREE.BufferGeometry().fromGeometry(geometry);
 
-  var displacement = new Float32Array( numFaces * 3 * 3 );
+  var displacement = new Float32Array(numFaces * 3 * 3);
 
-  for ( var f = 0; f < numFaces; f ++ ) {
-    var index = 9 * f;
-    var d = 10 * ( 0.5 - Math.random() );
-
-    for ( var i = 0; i < 3; i ++ ) {
-      displacement[ index + ( 3 * i )     ] = d;
-      displacement[ index + ( 3 * i ) + 1 ] = d;
-      displacement[ index + ( 3 * i ) + 2 ] = d;
+  for (var f = 0; f < numFaces; f++) {
+    var d = 10 * (0.5 - Math.random());
+    for (var i = 0; i < 3; i++) {
+      for (var j = 0; j < 3; j++) {
+        displacement[9 * f + (3 * i) + j] = d;
+      }
     }
   }
 
-  geometry.addAttribute( 'displacement', new THREE.BufferAttribute( displacement, 3 ) );
-  return geometry
+  geometry.addAttribute('displacement', new THREE.BufferAttribute(displacement, 3));
+  return geometry;
 }
 
 
@@ -47,7 +45,7 @@ AFRAME.registerGeometry('asteroid-geometry', {
 
     var finalGeometry = new THREE.Geometry();
     _.each(clumps, function (clumpMesh) {
-      clumpMesh.updateMatrix()
+      clumpMesh.updateMatrix();
       clumpMesh.geometry = new THREE.Geometry().fromBufferGeometry(clumpMesh.geometry)
       finalGeometry.merge(clumpMesh.geometry, clumpMesh.matrix)
     });
@@ -55,14 +53,12 @@ AFRAME.registerGeometry('asteroid-geometry', {
     finalGeometry = setupExplosion(finalGeometry)
     this.geometry = finalGeometry;
   }
-})
+});
 
 AFRAME.registerComponent('asteroid', {
   init: function() {
-    var el = this.el;
-
-    el.object3D.updateMatrix();
-    el.addEventListener("animationend", () => { this.disappear(); }, false);
+    this.el.object3D.updateMatrix();
+    this.el.addEventListener("animationend", () => { this.disappear(); }, false);
   },
 
   disappear: function() {

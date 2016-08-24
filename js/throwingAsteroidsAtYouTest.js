@@ -10,11 +10,10 @@ function normal_random(n) {
 function polar2cartesian(longitude, latitude, radius) {
   return {
     x: radius * Math.sin(longitude) * Math.cos(latitude),
-    z: -radius * Math.cos(longitude) * Math.cos(latitude),
+    z: radius * Math.cos(longitude) * Math.cos(latitude),
     y: radius * Math.sin(latitude)
    }
 }
-
 
 setInterval(() => {
   var longitude = normal_random(2) * Math.PI * 2;
