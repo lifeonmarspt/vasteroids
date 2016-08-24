@@ -4,12 +4,12 @@ import _ from 'lodash';
 
 function setupExplosion(geometry) {
   var numFaces = geometry.faces.length;
-  geometry = new THREE.BufferGeometry().fromGeometry(geometry);
+  geometry = new AFRAME.THREE.BufferGeometry().fromGeometry(geometry);
 
   var displacement = new Float32Array(numFaces * 3 * 3);
 
   for (var f = 0; f < numFaces; f++) {
-    var d = 10 * (0.5 - Math.random());
+    var d = _.random(-5.0, 5.0, true);
     for (var i = 0; i < 3; i++) {
       for (var j = 0; j < 3; j++) {
         displacement[9 * f + (3 * i) + j] = d;
@@ -17,41 +17,42 @@ function setupExplosion(geometry) {
     }
   }
 
-  geometry.addAttribute('displacement', new THREE.BufferAttribute(displacement, 3));
+  geometry.addAttribute('displacement', new AFRAME.THREE.BufferAttribute(displacement, 3));
   return geometry;
 }
 
+function distortedSphereGeometry(radius, widthSegments, heightSegments) {
+  var geometry = new AFRAME.THREE.SphereGeometry(radius, widthSegments, heightSegments);
+
+  for (var i = 0; i < geometry.vertices.length; i++) {
+    var x = i % (widthSegments + 1);
+    var y = i / (widthSegments + 1);
+
+    // don't touch the seams to avoid tearing
+    if (y > 1 && y < heightSegments && (x % widthSegments) != 0) {
+      geometry.vertices[i].multiplyScalar(_.random(1, 1.5, true));
+    }
+  }
+
+  return geometry;
+}
 
 AFRAME.registerGeometry('asteroid-geometry', {
   init: function() {
-    var clumps = [];
-    var firstGeometry = new AsteroidGeometry(1.0+0.5*Math.random(), 10, 10)
+    var finalGeometry = distortedSphereGeometry(_.random(1.0, 1.5, true), 10, 10);
 
-    clumps.push(new THREE.Mesh(firstGeometry));
+    for (var i = 0; i < _.random(2, 12); i++) {
+      var radius = _.random(1.0, 1.5, true);
+      var geometry = distortedSphereGeometry(radius, 10, 10);
 
-    for (var i = 0; i < 2+Math.random()*10; i++) {
+      var x = radius * _.random(-1.5, 1.5, true);
+      var y = radius * _.random(-1.5, 1.5, true);
+      var z = radius * _.random(-1.5, 1.5, true);
 
-      var radius = 1.1 + 0.5*Math.random();
-      var geometry = new AsteroidGeometry(radius, 10, 10);
-
-      var asteroid = new THREE.Mesh(geometry);
-
-      asteroid.position.x = _.random(-1.5*radius, 1.5*radius, true);
-      asteroid.position.y = _.random(-1.5*radius, 1.5*radius, true);
-      asteroid.position.z = _.random(-1.5*radius, 1.5*radius, true);
-
-      clumps.push(asteroid);
+      finalGeometry.merge(geometry, new AFRAME.THREE.Matrix4().makeTranslation(x, y, z));
     }
 
-    var finalGeometry = new THREE.Geometry();
-    _.each(clumps, function (clumpMesh) {
-      clumpMesh.updateMatrix();
-      clumpMesh.geometry = new THREE.Geometry().fromBufferGeometry(clumpMesh.geometry)
-      finalGeometry.merge(clumpMesh.geometry, clumpMesh.matrix)
-    });
-
-    finalGeometry = setupExplosion(finalGeometry)
-    this.geometry = finalGeometry;
+    this.geometry = setupExplosion(finalGeometry);
   }
 });
 

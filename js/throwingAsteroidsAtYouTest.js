@@ -1,3 +1,5 @@
+import polar2cartesian from "./polar2cartesian.js";
+
 function normal_random(n) {
   var x = 0;
   for (var i = 0; i < n; i++) {
@@ -5,14 +7,6 @@ function normal_random(n) {
   }
 
   return x / n;
-}
-
-function polar2cartesian(longitude, latitude, radius) {
-  return {
-    x: radius * Math.sin(longitude) * Math.cos(latitude),
-    z: radius * Math.cos(longitude) * Math.cos(latitude),
-    y: radius * Math.sin(latitude)
-   }
 }
 
 setInterval(() => {
