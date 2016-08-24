@@ -26,7 +26,7 @@ function start_asteroids() {
     ast.setAttribute('asteroid', true);
     ast.setAttribute('distance-limiter', "maxDistance: 100; minDistance: 10");
     ast.setAttribute('geometry', 'primitive: asteroid-geometry; skipCache: true; buffer: false;')
-    ast.setAttribute('material', 'shader: asteroid-explosion;');
+    ast.setAttribute('material', 'metalness: 0;');
     ast.setAttribute("position", polar2cartesian(longitude, latitude, 50.0));
     ast.setAttribute('sound', "src: #explosion-sound; on: hit");
 
@@ -49,23 +49,15 @@ function start_asteroids() {
 
     var redness = document.createElement('a-animation');
     redness.setAttribute('dur', '10000');
-    redness.setAttribute('attribute', 'material.opacity');
+    redness.setAttribute('attribute', 'material.color');
     redness.setAttribute('fill', 'forwards');
     redness.setAttribute('easing', 'linear');
-    redness.setAttribute('to', '1');
+    redness.setAttribute('from', '#a8a190');
+    redness.setAttribute('to', '#ba4c4c');
     redness.setAttribute('end', 'hit');
-
-    var explosion = document.createElement('a-animation');
-    explosion.setAttribute('dur', '1000');
-    explosion.setAttribute('attribute', 'material.amplitude');
-    explosion.setAttribute('fill', 'forwards');
-    explosion.setAttribute('easing', 'linear');
-    explosion.setAttribute('to', '1');
-    explosion.setAttribute('begin', 'hit');
 
     ast.appendChild(animTrans);
     ast.appendChild(animRot);
-    ast.appendChild(explosion);
     ast.appendChild(redness);
 
     document.querySelector('#asteroids').appendChild(ast);
@@ -74,3 +66,4 @@ function start_asteroids() {
 }
 
 export { start_asteroids, stop_asteroids }
+
