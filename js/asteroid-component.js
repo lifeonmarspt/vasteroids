@@ -5,14 +5,12 @@ function setupExplosion(geometry) {
   var numFaces = geometry.faces.length;
   geometry = new AFRAME.THREE.BufferGeometry().fromGeometry(geometry);
 
-  var displacement = new Float32Array(numFaces * 3 * 3);
+  var displacement = new Float32Array(numFaces * 9);
 
   for (var f = 0; f < numFaces; f++) {
     var d = _.random(-5.0, 5.0, true);
-    for (var i = 0; i < 3; i++) {
-      for (var j = 0; j < 3; j++) {
-        displacement[9 * f + (3 * i) + j] = d;
-      }
+    for (var i = 0; i < 9; i++) {
+      displacement[9 * f + i] = d;
     }
   }
 

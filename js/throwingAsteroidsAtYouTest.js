@@ -12,6 +12,7 @@ function normal_random(n) {
 setInterval(() => {
   var longitude = normal_random(2) * Math.PI * 2;
   var latitude = normal_random(10) * Math.PI/2 - Math.PI/4;
+
   var ast = document.createElement('a-entity');
   ast.setAttribute('asteroid', true);
   ast.setAttribute('distance-limiter', "maxDistance: 100");
@@ -51,4 +52,3 @@ setInterval(() => {
 
   document.querySelector('#asteroids').appendChild(ast);
 }, 2000);
-
