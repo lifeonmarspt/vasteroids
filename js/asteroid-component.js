@@ -1,4 +1,3 @@
-import AsteroidGeometry from "./asteroidGeometry.js";
 import AFRAME from 'aframe';
 import _ from 'lodash';
 
