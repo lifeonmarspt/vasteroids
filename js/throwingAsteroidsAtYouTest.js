@@ -1,3 +1,4 @@
+//TODO: classify
 import polar2cartesian from "./polar2cartesian.js";
 
 var interval;
@@ -12,8 +13,11 @@ function normal_random(n) {
 }
 
 function stop_asteroids() {
+
   clearInterval(interval)
-  document.getElementById('text').setAttribute('text', 'text: You lost. Bummer.')
+  document.querySelectorAll('[asteroid]').forEach(function(ast) {
+    ast.emit('hit')
+  })
 }
 
 function start_asteroids() {
@@ -24,7 +28,8 @@ function start_asteroids() {
 
     var ast = document.createElement('a-entity');
     ast.setAttribute('asteroid', true);
-    ast.setAttribute('distance-limiter', "maxDistance: 100");
+    ast.setAttribute('class', 'collidable');
+    ast.setAttribute('distance-limiter', "maxDistance: 100; minDistance: 5;");
     ast.setAttribute('geometry', 'primitive: asteroid-geometry; skipCache: true; buffer: false;')
     ast.setAttribute('material', 'metalness: 0;');
     ast.setAttribute("position", polar2cartesian(longitude, latitude, 50.0));

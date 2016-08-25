@@ -3,12 +3,20 @@ import { start_asteroids } from './throwingAsteroidsAtYouTest.js'
 
 AFRAME.registerComponent('start-button', {
   init: function() {
-
-    this.el.addEventListener('hit', function() {
-
-      this.parentNode.removeChild(this);
-      document.getElementById('text').emit('start');
-      start_asteroids();
-    }, false)
-  }
+  	var self = this
+    this.el.addEventListener('hit', this.startTimer.bind(this));
+    this.el.addEventListener('restart', this.restart.bind(this));
+  },
+  startTimer: function() {
+  	if (this.el.getAttribute('material').visible == "false")
+  		return
+  	this.el.setAttribute('class', "not-collidable");
+  	this.el.setAttribute('material', 'visible: false;');
+    document.getElementById('text').emit('start');
+    start_asteroids();
+  },
+  restart: function() {
+ 	this.el.setAttribute('material', 'visible: true;');
+ 	this.el.setAttribute('class', "collidable");
+ }
 })

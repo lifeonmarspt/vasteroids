@@ -6,6 +6,10 @@ AFRAME.registerComponent('collider', {
   },
 
   tick: function() {
+
+    if (!this.data.targetSet)
+      return;
+
     var collisions = [];
 
     this.el.object3D.updateMatrix();
@@ -15,8 +19,6 @@ AFRAME.registerComponent('collider', {
     var geometry = mesh.geometry
     var object3D = this.el.object3D
     var originPoint = this.el.object3D.position.clone();
-    if (geometry instanceof AFRAME.THREE.BufferGeometry)
-      geometry = new THREE.Geometry().fromBufferGeometry(geometry);
 
     if (geometry.vertices) {
       for (var vertexIndex = 0; vertexIndex < geometry.vertices.length; vertexIndex++) {
