@@ -5,29 +5,25 @@ AFRAME.registerComponent('spawner', {
     on: { default: 'click' },
   },
 
-  update: function (oldData) {
-    if (this.data.on === oldData.on) { return; }
-
-    var spawn = this.spawn.bind(this);
-
-    this.el.removeEventListener(oldData.on, spawn);
-    this.el.addEventListener(this.data.on, spawn);
+  update: function () {
+    this.el.sceneEl.addEventListener(this.data.on, this.spawn.bind(this));
   },
 
   spawn: function () {
     var camPos = this.el.getAttribute('position');
-    var camRot = this.el.getAttribute('rotation')
+    var camRot = this.el.getAttribute('rotation');
 
     var entity = document.createElement('a-entity');
 
-    entity.setAttribute('geometry', "primitive: box; height: 0.1; width: 0.1; depth: 2; buffer: false;");
+    //TODO: Extract to mixin, if possible
+    //dependency on camPos and camRot might make that difficult, investigate
+    entity.setAttribute('geometry', "primitive: box; height: 0.1; width: 0.1; depth: 1; buffer: false;");
     entity.setAttribute('position', camPos);
     entity.setAttribute('rotation', camRot);
-
     entity.setAttribute('laser', true);
-    entity.setAttribute('collider', "targetSet: .collidable");
     entity.setAttribute('distance-limiter', true);
     entity.setAttribute('sound', "src: #laser-sound; autoplay: true");
+    entity.setAttribute('raycaster', 'near: 0.1; far: 1; objects: .collidable;')
 
     this.el.sceneEl.appendChild(entity);
   }

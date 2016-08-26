@@ -14,15 +14,16 @@
       <a-assets>
         <audio id="laser-sound" src="sounds/laser.wav">
         <audio id="explosion-sound" src="sounds/explosion.wav">
+        <audio id="shield-sound" src="sounds/shield.wav">
+        <audio id="final-shield-sound" src="sounds/finalshield.wav">
       </a-assets>
 
       <a-entity id="asteroids">
         <a-entity start-button class="collidable" geometry='primitive: asteroid-geometry; skipCache: true; buffer: false;' material="visible: true;" position="0 0 -10" ></a-entity>
       </a-entity>
 
-      <a-camera id="player" player position="0 0 -50" spawner="mixin: laser; on: mousedown">
+      <a-camera id="player" player spawner="on: click" position="0 0 -50">
         <a-entity
-          cursor="fuse: false;"
           position="0 0 -1"
           scale="0.05 0.05 0.05"
           geometry="primitive: ring"
@@ -31,6 +32,7 @@
         <a-entity
           flasher
           position="0 0 -0.5"
+          sound="src: #shield-sound; on: flash"
           >
         </a-entity>
         <a-entity id="text" position="-1.5 0 -5" countdown-timer text="text: Shoot to start">

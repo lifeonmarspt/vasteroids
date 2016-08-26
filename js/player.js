@@ -12,13 +12,15 @@ AFRAME.registerComponent('player', {
 		this.data.lives -= 1;
 		console.log("now has " + this.data.lives)
 
-		document.querySelector('[flasher]').emit('flash')
 		if (this.data.lives == 0)
 		{
+			document.querySelector('[flasher]').emit('final-flash')
 			stop_asteroids()
 			document.querySelector('[start-button]').emit('restart');
 			document.querySelector('#text').emit('stop');
 			this.data.lives = 5
 		}
+		else
+			document.querySelector('[flasher]').emit('flash')
 	}
 })

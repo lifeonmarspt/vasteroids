@@ -33,7 +33,7 @@ function start_asteroids() {
     ast.setAttribute('geometry', 'primitive: asteroid-geometry; skipCache: true; buffer: false;')
     ast.setAttribute('material', 'metalness: 0;');
     ast.setAttribute("position", polar2cartesian(longitude, latitude, 50.0));
-    ast.setAttribute('sound', "src: #explosion-sound; on: hit");
+    ast.setAttribute('sound', "src: #explosion-sound; on: hit; volume: 10;");
 
     var animRot = document.createElement('a-animation');
     animRot.setAttribute('attribute', 'rotation');

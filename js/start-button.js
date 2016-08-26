@@ -13,6 +13,7 @@ AFRAME.registerComponent('start-button', {
   	this.el.setAttribute('class', "not-collidable");
   	this.el.setAttribute('material', 'visible: false;');
     document.getElementById('text').emit('start');
+    document.querySelector('[flasher]').setAttribute('sound', "src: #shield-sound; on: flash;")
     start_asteroids();
   },
   restart: function() {
