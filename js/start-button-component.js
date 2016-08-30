@@ -1,5 +1,5 @@
 import AFRAME from 'aframe';
-import { start_asteroids } from './throwingAsteroidsAtYouTest.js'
+import Vasteroids from './vasteroids-logic.js'
 
 AFRAME.registerComponent('start-button', {
   init: function() {
@@ -14,7 +14,7 @@ AFRAME.registerComponent('start-button', {
   	this.el.setAttribute('material', 'visible: false;');
     document.getElementById('text').emit('start');
     document.querySelector('[flasher]').setAttribute('sound', "src: #shield-sound; on: flash;")
-    start_asteroids();
+    Vasteroids.start_asteroids();
   },
   restart: function() {
  	this.el.setAttribute('material', 'visible: true;');

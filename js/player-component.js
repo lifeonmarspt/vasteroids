@@ -1,5 +1,5 @@
 import AFRAME from 'aframe'
-import { stop_asteroids } from './throwingAsteroidsAtYouTest.js'
+import Vasteroids from './vasteroids-logic.js'
 
 AFRAME.registerComponent('player', {
 	schema: {
@@ -10,12 +10,11 @@ AFRAME.registerComponent('player', {
 	},
 	removeLife: function(){
 		this.data.lives -= 1;
-		console.log("now has " + this.data.lives)
 
 		if (this.data.lives == 0)
 		{
 			document.querySelector('[flasher]').emit('final-flash')
-			stop_asteroids()
+			Vasteroids.stop_asteroids()
 			document.querySelector('[start-button]').emit('restart');
 			document.querySelector('#text').emit('stop');
 			this.data.lives = 5

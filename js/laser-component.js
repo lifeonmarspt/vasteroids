@@ -7,7 +7,6 @@ AFRAME.registerComponent('laser', {
   },
   init: function () {
     this.el.addEventListener('raycaster-intersection', function (e) {
-      console.log('Player hit something!');
       e.detail.els[0].emit('hit')
       this.sceneEl.removeChild(this)
 
