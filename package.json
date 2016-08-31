@@ -5,7 +5,6 @@
   "main": "index.js",
   "dependencies": {
     "aframe": "git+https://github.com/aframevr/aframe.git",
-    "aframe-layout": "^1.0.2",
     "aframe-text-component": "^0.3.0",
     "lodash": "^4.14.2",
     "webpack": "^1.13.1",
@@ -19,7 +18,7 @@
     "webpack": "^1.13.1"
   },
   "scripts": {
-    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --content-base public"
+    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --content-base public --host 0.0.0.0"
   },
   "repository": {
     "type": "git",

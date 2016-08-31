@@ -19,7 +19,6 @@ AFRAME.registerComponent('flasher', {
 
 		this.el.appendChild(opacity)
 	},
-	//TODO: I'm pretty sure this is the name of an attack on dragon ball or something
 	finalFlash: function() {
 		this.el.setAttribute('material', 'transparent: true; opacity: 1.0;')
 		this.el.setAttribute('sound', "src: #final-shield-sound; autoplay: true")

@@ -1,4 +1,3 @@
-//TODO: classify
 import polar2cartesian from "./polar2cartesian.js";
 import normal_random from "./normal-random.js";
 
@@ -24,9 +23,8 @@ class Vasteroids{
       var latitude = normal_random(10) * Math.PI/2 - Math.PI/4;
 
       var ast = document.createElement('a-entity');
-      ast.setAttribute('asteroid', true);
+      ast.setAttribute('asteroid', "player: #player");
       ast.setAttribute('class', 'collidable');
-      ast.setAttribute('distance-limiter', "maxDistance: 100; minDistance: 5;");
       ast.setAttribute('geometry', 'primitive: asteroid; skipCache: true; buffer: false;')
       ast.setAttribute('material', 'metalness: 0;');
       ast.setAttribute("position", polar2cartesian(longitude, latitude, 50.0));

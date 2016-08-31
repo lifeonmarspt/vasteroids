@@ -1,10 +1,21 @@
 import AFRAME from 'aframe';
 
 AFRAME.registerComponent('asteroid', {
+  schema: {
+    player: {type: "selector"}
+  },
+
   init: function() {
     this.el.object3D.updateMatrix();
     this.hitListener = () => { this.explode(); };
     this.el.addEventListener("hit", this.hitListener, false);
+  },
+
+  tick: function() {
+    if (this.el.object3D.position.length() < 2) {
+      this.data.player.emit('hit')
+      this.el.parentNode.removeChild(this.el);
+    }
   },
 
   explode: function() {
