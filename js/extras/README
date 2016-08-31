@@ -1,0 +1,9 @@
+In this folder you can find two helpful files
+
+> asteroid-geometry.js
+An a-frame geometry component that contains a better-looking asteroid, registered as "asteroid-geometry", which you can use in your entities.
+It also doubles up as an example as how to use THREE methods to generate geometry and use it inside a-frame entities.
+
+> asteroid-explode-shader.js
+An example a-frame shader registration, with a vertex/fragment shader combo that "explodes" polys with regards to a previously computed "displacement". (see setupExplosion() definition on asteroid-geometry.js)
+

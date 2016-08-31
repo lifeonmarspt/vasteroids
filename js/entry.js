@@ -1,14 +1,7 @@
+//This file is the entrypoint for webpack, the module bundler we're using in this project
+//Just require the files you'll be using and they'll all be bundled together in one single file
+
 require('aframe');
-require('aframe-layout');
 require('aframe-text-component');
-require('./start-button-component.js');
-require('./flasher-component.js');
-require('./player-component.js');
-require('./countdown-timer-component.js');
-require('./asteroid-explosion-shader.js');
-require('./asteroid-component.js');
-require('./asteroid-geometry.js');
-require('./distance-limiter-component.js');
-require('./vasteroids-logic.js');
-require('./laser-component.js');
-require('./spawner-component.js');
+//require('./extras/asteroid-geometry.js')
+//require('./extras/asteroid-explosion-shader.js')

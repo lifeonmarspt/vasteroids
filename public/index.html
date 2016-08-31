@@ -9,51 +9,15 @@
   <body>
     <script src="bundle.js"></script>
     <a-scene>
-      <a-sky src="skybox-small.jpg"></a-sky>
+      <!--
 
-      <a-assets>
-        <audio id="laser-sound" src="sounds/laser.wav">
-        <audio id="explosion-sound" src="sounds/explosion.wav">
-        <audio id="shield-sound" src="sounds/shield.wav">
-        <audio id="final-shield-sound" src="sounds/finalshield.wav">
-      </a-assets>
+        Add more stuff to your scene!
+        Let's start with a simple entity, which doesn't draw by itself, positioned ahead of the camera, and add components as we go..
 
-      <a-entity id="asteroids">
-        <a-entity start-button class="collidable" geometry='primitive: asteroid; skipCache: true; buffer: false;' material="visible: true;" position="0 0 -10" ></a-entity>
-      </a-entity>
-
-      <a-camera id="player" player spawner="on: click" position="0 0 -50">
-        <a-entity
-          position="0 0 -1"
-          scale="0.05 0.05 0.05"
-          geometry="primitive: ring"
-          material="color: green; shader: flat">
+        <a-entity position="0 0 -5">
         </a-entity>
-        <a-entity
-          flasher
-          position="0 0 -0.5"
-          sound="src: #shield-sound; on: flash"
-          >
-        </a-entity>
-        <a-entity id="text" position="-1.5 0 -5" countdown-timer text="text: Shoot to start">
-          <a-animation
-            dur="750"
-            attribute="position"
-            fill="forwards"
-            easing="ease-out"
-            to="-5 5 -15"
-            begin="start">
-          </a-animation>
-          <a-animation
-            dur="750"
-            attribute="position"
-            fill="forwards"
-            easing="ease-out"
-            to="-3.5 0 -5"
-            begin="stop">
-          </a-animation>
-          </a-entity>
-      </a-camera>
+
+      -->
     </a-scene>
   </body>
 </html>
