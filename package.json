@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "aframe": "git+https://github.com/aframevr/aframe.git",
+    "aframe": "^0.3.1",
     "aframe-text-component": "^0.3.0",
     "lodash": "^4.14.2",
     "webpack": "^1.13.1",
