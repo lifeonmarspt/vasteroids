@@ -13,6 +13,7 @@
 ##Further resourced
 
 Visit [the a-frame docs](https://aframe.io/docs/0.3.0/introduction/) for help and information!
+
 Visit [awesome-aframe](https://github.com/aframevr/awesome-aframe), a list of 'awesome things' (from components to shaders and utilities) for a-frame, curated by the a-frame team. 
 
 [Skybox from likeonions on deviantArt](http://likeonions.deviantart.com/art/Wormhole-Space-Equirectangular-Skybox-587119511)
