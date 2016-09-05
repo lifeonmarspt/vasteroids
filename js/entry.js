@@ -1,14 +1,12 @@
 require('aframe');
-require('aframe-layout');
 require('aframe-text-component');
 require('./start-button-component.js');
 require('./flasher-component.js');
-require('./player-component.js');
+require('./player-system.js');
 require('./countdown-timer-component.js');
 require('./asteroid-explosion-shader.js');
 require('./asteroid-component.js');
 require('./asteroid-geometry.js');
 require('./distance-limiter-component.js');
-require('./vasteroids-logic.js');
 require('./laser-component.js');
 require('./spawner-component.js');

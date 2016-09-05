@@ -1,5 +1,4 @@
 import AFRAME from 'aframe';
-import Vasteroids from './vasteroids-logic.js'
 
 AFRAME.registerComponent('start-button', {
   init: function() {
@@ -12,9 +11,7 @@ AFRAME.registerComponent('start-button', {
   		return
   	this.el.setAttribute('class', "not-collidable");
   	this.el.setAttribute('material', 'visible: false;');
-    document.getElementById('text').emit('start');
-    document.querySelector('[flasher]').setAttribute('sound', "src: #shield-sound; on: flash;")
-    Vasteroids.start_asteroids();
+    this.el.sceneEl.systems['player'].start_asteroids();
   },
   restart: function() {
  	this.el.setAttribute('material', 'visible: true;');

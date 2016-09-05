@@ -13,7 +13,7 @@ AFRAME.registerComponent('asteroid', {
 
   tick: function() {
     if (this.el.object3D.position.length() < 2) {
-      this.data.player.emit('hit')
+      this.el.sceneEl.systems['player'].removeLife()
       this.el.parentNode.removeChild(this.el);
     }
   },
