@@ -14,6 +14,7 @@ AFRAME.registerComponent('asteroid', {
   tick: function() {
     if (this.el.object3D.position.length() < 2) {
       this.el.sceneEl.systems['player'].removeLife()
+      this.el.removeAttribute('sound')
       this.el.parentNode.removeChild(this.el);
     }
   },

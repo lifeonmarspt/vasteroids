@@ -4,7 +4,9 @@ import normal_random from "./normal-random.js";
 
 AFRAME.registerSystem('player', {
   schema: {
-    lives: {type: 'number', default: 5}
+    lives: {type: 'number', default: 5},
+    spawnSpeed: {type: "number", default: 3000},
+    spawnSpeedMultiplier: {type: "number", default: 0.90}
   },
 
   removeLife: function() {
@@ -22,21 +24,31 @@ AFRAME.registerSystem('player', {
 
   stop_asteroids: function() {
 
-    clearInterval(this.interval)
-    this.interval = null
+    clearTimeout(this.timeout)
+    this.timeout = null
     document.querySelector('[start-button]').emit('restart');
     document.querySelector('#text').emit('stop');
-    document.querySelectorAll('[asteroid]').forEach(function(ast) {
+    Array.prototype.forEach.call(document.querySelectorAll('[asteroid]'), function(ast) {
       ast.emit('hit')
     })
+
   },
 
   start_asteroids: function() {
 
-  document.getElementById('text').emit('start');
-    document.querySelector('[flasher]').setAttribute('sound', "src: #shield-sound; on: flash;")
+    document.getElementById('text').emit('start');
 
-  this.interval = setInterval(() => {
+    var ent = document.createElement('a-entity')
+    ent.setAttribute('flasher', true)
+    ent.setAttribute('position', "0 0 -0.5")
+    document.querySelector('a-camera').appendChild(ent)
+
+    this.spawn_asteroid.bind(this)
+
+    this.timeout = setTimeout(this.spawn_asteroid.bind(this), this.data.spawnSpeed)
+  },
+
+  spawn_asteroid: function() {
     var longitude = normal_random(2) * Math.PI * 2;
     var latitude = normal_random(10) * Math.PI/2 - Math.PI/4;
 
@@ -79,8 +91,13 @@ AFRAME.registerSystem('player', {
     ast.appendChild(redness);
 
     document.querySelector('#asteroids').appendChild(ast);
-  }, 2000);
+    if (this.timeout !== null) {
 
+      if (this.data.spawnSpeed > 300)
+        this.data.spawnSpeed = this.data.spawnSpeed * this.data.spawnSpeedMultiplier
+
+      this.timeout = setTimeout(this.spawn_asteroid.bind(this), this.data.spawnSpeed)
+    }
   }
 })
 

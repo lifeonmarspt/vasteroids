@@ -1,5 +1,6 @@
 require('aframe');
 require('aframe-text-component');
+require('./safari-mobile-sound-support.js');
 require('./start-button-component.js');
 require('./flasher-component.js');
 require('./player-system.js');

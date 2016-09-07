@@ -2,6 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
@@ -12,10 +14,10 @@
       <a-sky src="skybox-small.jpg"></a-sky>
 
       <a-assets>
-        <audio id="laser-sound" src="sounds/laser.wav">
-        <audio id="explosion-sound" src="sounds/explosion.wav">
-        <audio id="shield-sound" src="sounds/shield.wav">
-        <audio id="final-shield-sound" src="sounds/finalshield.wav">
+        <audio id="laser-sound" src="sounds/laser.wav"></audio>
+        <audio id="explosion-sound" src="sounds/explosion.wav"></audio>
+        <audio id="shield-sound" src="sounds/shield.wav"></audio>
+        <audio id="final-shield-sound" src="sounds/finalshield.wav"></audio>
       </a-assets>
 
       <a-entity id="asteroids">
@@ -29,13 +31,8 @@
           geometry="primitive: ring"
           material="color: green; shader: flat">
         </a-entity>
-        <a-entity
-          flasher
-          position="0 0 -0.5"
-          sound="src: #shield-sound; on: flash"
-          >
         </a-entity>
-        <a-entity id="text" position="-1.5 0 -5" countdown-timer text="text: Shoot to start">
+        <a-entity id="text" position="-1.5 0 -5" countdown-timer text="text: Shoot to start" material="color: white;">
           <a-animation
             dur="750"
             attribute="position"
