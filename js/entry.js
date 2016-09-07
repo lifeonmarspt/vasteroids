@@ -4,5 +4,6 @@
 require('aframe');
 require('aframe-text-component');
 require('./spawner-component.js');
+require('./mobile-safari-sound-support.js');
 //require('./extras/asteroid-geometry.js')
 //require('./extras/asteroid-explosion-shader.js')

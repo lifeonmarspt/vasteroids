@@ -7,7 +7,7 @@ import AFRAME from 'aframe';
 AFRAME.registerComponent('spawner', {
   schema: {
     //You can declare properties (and their types and default values) here, read the docs for more information
-  }
+  },
   init: function() {
     //Invoked when the component is initialized
   },
