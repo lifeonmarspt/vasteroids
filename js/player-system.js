@@ -6,7 +6,7 @@ AFRAME.registerSystem('player', {
   schema: {
     lives: {type: 'number', default: 5},
     spawnSpeed: {type: "number", default: 3000},
-    spawnSpeedMultiplier: {type: "number", default: 0.90}
+    spawnSpeedMultiplier: {type: "number", default: 0.95}
   },
 
   removeLife: function() {
@@ -57,7 +57,7 @@ AFRAME.registerSystem('player', {
     ast.setAttribute('class', 'collidable');
     ast.setAttribute('geometry', 'primitive: asteroid; skipCache: true; buffer: false;')
     ast.setAttribute('material', 'metalness: 0;');
-    ast.setAttribute("position", polar2cartesian(longitude, latitude, 50.0));
+    ast.setAttribute("position", polar2cartesian(longitude, latitude, 100.0));
     ast.setAttribute('sound', "src: #explosion-sound; on: hit; volume: 10;");
 
     var animRot = document.createElement('a-animation');

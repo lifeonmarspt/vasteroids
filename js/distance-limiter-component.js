@@ -2,7 +2,7 @@ import AFRAME from 'aframe';
 
 AFRAME.registerComponent('distance-limiter', {
   schema: {
-    maxDistance: { type: 'int', default: 50 }
+    maxDistance: { type: 'int', default: 100 }
   },
 
   tick: function () {
