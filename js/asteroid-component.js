@@ -1,9 +1,6 @@
 import AFRAME from 'aframe';
 
 AFRAME.registerComponent('asteroid', {
-  schema: {
-    player: {type: "selector"}
-  },
 
   init: function() {
     this.el.object3D.updateMatrix();

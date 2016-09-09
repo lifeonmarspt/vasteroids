@@ -1,12 +1,9 @@
 import AFRAME from 'aframe'
 
 AFRAME.registerComponent('spawner', {
-  schema: {
-    on: { default: 'click' },
-  },
 
-  update: function () {
-    this.el.sceneEl.addEventListener(this.data.on, this.spawn.bind(this));
+  init: function () {
+    this.el.sceneEl.addEventListener("click", this.spawn.bind(this));
   },
 
   spawn: function () {

@@ -14,12 +14,9 @@ AFRAME.registerSystem('player', {
 
     if (this.data.lives == 0)
     {
-      document.querySelector('[flasher]').emit('final-flash')
       this.stop_asteroids()
       this.data.lives = 5
     }
-    else
-      document.querySelector('[flasher]').emit('flash')
   },
 
   stop_asteroids: function() {
@@ -27,7 +24,6 @@ AFRAME.registerSystem('player', {
     clearTimeout(this.timeout)
     this.timeout = null
     document.querySelector('[start-button]').emit('restart');
-    document.querySelector('#text').emit('stop');
     Array.prototype.forEach.call(document.querySelectorAll('[asteroid]'), function(ast) {
       ast.emit('hit')
     })
@@ -35,13 +31,6 @@ AFRAME.registerSystem('player', {
   },
 
   start_asteroids: function() {
-
-    document.getElementById('text').emit('start');
-
-    var ent = document.createElement('a-entity')
-    ent.setAttribute('flasher', true)
-    ent.setAttribute('position', "0 0 -0.5")
-    document.querySelector('a-camera').appendChild(ent)
 
     this.spawn_asteroid.bind(this)
 
