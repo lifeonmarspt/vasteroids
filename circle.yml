@@ -1,0 +1,14 @@
+version: 2
+
+jobs:
+  build:
+    working_directory: ~
+    docker:
+      - image: circleci/node:6.10
+    steps:
+      - run: sudo apt install awscli
+      - checkout
+      - run: yarn
+      - run: yarn run webpack
+      - run: aws s3 sync --delete --acl="public-read" public/ s3://lifeonmars-static-websites/vasteroids.lifeonmars.pt
+
