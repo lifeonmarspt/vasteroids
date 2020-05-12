@@ -8,7 +8,7 @@
     "aframe-text-component": "^0.3.0",
     "lodash": "^4.14.2",
     "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.15.0"
+    "webpack-dev-server": "^3.1.11"
   },
   "devDependencies": {
     "babel-core": "^6.13.2",
