@@ -1,5 +1,5 @@
 import AFRAME from 'aframe';
-import _ from 'lodash';
+import random from 'lodash/random';
 
 function setupExplosion(geometry) {
   var numFaces = geometry.faces.length;
@@ -9,7 +9,7 @@ function setupExplosion(geometry) {
   var displacement = new Float32Array(numFaces * 9);
 
   for (var f = 0; f < numFaces; f++) {
-    var d = _.random(-5.0, 5.0, true);
+    var d = random(-5.0, 5.0, true);
     for (var i = 0; i < 9; i++) {
       displacement[9 * f + i] = d;
     }
@@ -28,7 +28,7 @@ function distortedSphereGeometry(radius, widthSegments, heightSegments) {
 
     // don't touch the seams to avoid tearing
     if (y > 1 && y < heightSegments && (x % widthSegments) != 0) {
-      geometry.vertices[i].multiplyScalar(_.random(0.75, 1.5, true));
+      geometry.vertices[i].multiplyScalar(random(0.75, 1.5, true));
     }
   }
 
@@ -37,15 +37,15 @@ function distortedSphereGeometry(radius, widthSegments, heightSegments) {
 
 AFRAME.registerGeometry('asteroid', {
   init: function() {
-    var finalGeometry = distortedSphereGeometry(_.random(1.0, 1.5, true), 20, 10);
+    var finalGeometry = distortedSphereGeometry(random(1.0, 1.5, true), 20, 10);
 
-    for (var i = 0; i < _.random(2, 12); i++) {
-      var radius = _.random(1.0, 1.5, true);
+    for (var i = 0; i < random(2, 12); i++) {
+      var radius = random(1.0, 1.5, true);
       var geometry = distortedSphereGeometry(radius, 20, 10);
 
-      var x = radius * _.random(-1.5, 1.5, true);
-      var y = radius * _.random(-1.5, 1.5, true);
-      var z = radius * _.random(-1.5, 1.5, true);
+      var x = radius * random(-1.5, 1.5, true);
+      var y = radius * random(-1.5, 1.5, true);
+      var z = radius * random(-1.5, 1.5, true);
 
       finalGeometry.merge(geometry, new AFRAME.THREE.Matrix4().makeTranslation(x, y, z));
     }
