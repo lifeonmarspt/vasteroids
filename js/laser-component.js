@@ -1,7 +1,6 @@
 import AFRAME from 'aframe'
 
 AFRAME.registerComponent('laser', {
-
   schema: {
     speed: { default: 0.5 }
   },
