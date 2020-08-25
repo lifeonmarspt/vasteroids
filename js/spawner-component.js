@@ -18,8 +18,8 @@ AFRAME.registerComponent('spawner', {
     entity.setAttribute('geometry', "primitive: box; height: 0.1; width: 0.1; depth: 1; buffer: false;");
     entity.setAttribute('position', camPos);
     entity.setAttribute('rotation', camRot);
-    entity.setAttribute('laser', true);
-    entity.setAttribute('distance-limiter', true);
+    entity.setAttribute('laser', {});
+    entity.setAttribute('distance-limiter', {});
     entity.setAttribute('sound', "src: #laser-sound; autoplay: true");
     entity.setAttribute('raycaster', 'far: 0.5; objects: .collidable;')
 

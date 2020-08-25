@@ -7,46 +7,41 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <script src="bundle.js"></script>
   </head>
   <body>
-    <script src="bundle.js"></script>
     <a-scene>
       <a-sky src="skybox-small.jpg"></a-sky>
       <a-assets>
-        <audio id="laser-sound" src="sounds/laser.wav"></audio>
-        <audio id="explosion-sound" src="sounds/explosion.wav"></audio>
-        <audio id="shield-sound" src="sounds/shield.wav"></audio>
-        <audio id="final-shield-sound" src="sounds/finalshield.wav"></audio>
+        <audio preload="auto" id="laser-sound" src="sounds/laser.wav"></audio>
+        <audio preload="auto" id="explosion-sound" src="sounds/explosion.wav"></audio>
+        <audio preload="auto" id="shield-sound" src="sounds/shield.wav"></audio>
+        <audio preload="auto" id="final-shield-sound" src="sounds/finalshield.wav"></audio>
       </a-assets>
 
       <a-entity id="asteroids">
-        <a-entity start-button class="collidable" geometry='primitive: asteroid; skipCache: true; buffer: false;' material="visible: true;" position="0 0 -10" ></a-entity>
+        <a-entity start-button class="collidable" geometry='primitive: asteroid; skipCache: true; buffer: false;' material="visible: true;" position="0 0 -15" ></a-entity>
       </a-entity>
 
-      <a-camera id="player" spawner="on: click" position="0 0 -50">
+      <a-camera id="player" spawner="on: click" position="0 0 0">
         <a-entity
           position="0 0 -1"
           scale="0.05 0.05 0.05"
           geometry="primitive: ring"
           material="color: green; shader: flat">
         </a-entity>
-        <a-entity id="text" position="-1.5 0 -5" countdown-timer text="text: Shoot to start" material="color: white;">
-          <a-animation
-            dur="750"
-            attribute="position"
-            fill="forwards"
-            easing="ease-out"
-            to="-5 5 -15"
-            begin="start">
-          </a-animation>
-          <a-animation
-            dur="750"
-            attribute="position"
-            fill="forwards"
-            easing="ease-out"
-            to="-3.5 0 -8"
-            begin="stop">
-          </a-animation>
+        <a-entity
+          id="text"
+          position="0 2 -6"
+          scale="20 20 20"
+          countdown-timer
+          text="align: center; value: Shoot to start"
+          material="color: white;"
+          animation__1="property: position; dur: 750; to: 0 5 -15; startEvents: start"
+          animation__2="property: position; dur: 750; to: 0 2 -5; startEvents: stop"
+        >
+        <!--
+        -->
         </a-entity>
       </a-camera>
     </a-scene>

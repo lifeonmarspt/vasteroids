@@ -5,25 +5,23 @@ import normal_random from "./normal-random.js";
 AFRAME.registerSystem('player', {
   schema: {
     lives: {type: 'number', default: 5},
-    spawnSpeed: {type: "number", default: 3000},
-    spawnSpeedMultiplier: {type: "number", default: 0.95}
+    spawnSpeed: {type: "number", default: 5000},
+    spawnSpeedMultiplier: {type: "number", default: 0.99}
   },
 
   removeLife: function() {
     this.data.lives -= 1;
 
-    if (this.data.lives == 0)
-    {
+    if (this.data.lives == 0) {
       document.querySelector('[flasher]').emit('final-flash')
       this.stop_asteroids()
       this.data.lives = 5
-    }
-    else
+    } else {
       document.querySelector('[flasher]').emit('flash')
+    }
   },
 
   stop_asteroids: function() {
-
     clearTimeout(this.timeout)
     this.timeout = null
     document.querySelector('[start-button]').emit('restart');
@@ -39,7 +37,7 @@ AFRAME.registerSystem('player', {
     document.getElementById('text').emit('start');
 
     var ent = document.createElement('a-entity')
-    ent.setAttribute('flasher', true)
+    ent.setAttribute('flasher', {})
     ent.setAttribute('position', "0 0 -0.5")
     document.querySelector('a-camera').appendChild(ent)
 
@@ -60,35 +58,31 @@ AFRAME.registerSystem('player', {
     ast.setAttribute("position", polar2cartesian(longitude, latitude, 100.0));
     ast.setAttribute('sound', "src: #explosion-sound; on: hit; volume: 10;");
 
-    var animRot = document.createElement('a-animation');
-    animRot.setAttribute('attribute', 'rotation');
-    animRot.setAttribute('dur', '1000');
-    animRot.setAttribute('fill', 'forwards');
-    animRot.setAttribute('to', '0 360 0');
-    animRot.setAttribute('easing', 'linear');
-    animRot.setAttribute('repeat', 'indefinite');
-    animRot.setAttribute('end', 'hit');
+    ast.setAttribute("animation__rotation", {
+      property: 'rotation',
+      dur: 1000,
+      to: '0 360 0',
+      easing: 'linear',
+      loop: true,
+      pauseEvents: 'hit',
+    });
 
-    var animTrans = document.createElement('a-animation');
-    animTrans.setAttribute('dur', '10000');
-    animTrans.setAttribute('attribute', 'position');
-    animTrans.setAttribute('fill', 'forwards');
-    animTrans.setAttribute('easing', 'linear');
-    animTrans.setAttribute('to', '0 0 0');
-    animTrans.setAttribute('end', 'hit');
+    ast.setAttribute("animation__translation", {
+      property: 'position',
+      dur: 10000,
+      to: '0 0 0',
+      easing: 'linear',
+      pauseEvents: 'hit',
+    });
 
-    var redness = document.createElement('a-animation');
-    redness.setAttribute('dur', '10000');
-    redness.setAttribute('attribute', 'material.color');
-    redness.setAttribute('fill', 'forwards');
-    redness.setAttribute('easing', 'linear');
-    redness.setAttribute('from', '#a8a190');
-    redness.setAttribute('to', '#ba4c4c');
-    redness.setAttribute('end', 'hit');
-
-    ast.appendChild(animTrans);
-    ast.appendChild(animRot);
-    ast.appendChild(redness);
+    ast.setAttribute("animation__color", {
+      property: 'material.color',
+      dur: 10000,
+      from: '#a8a190',
+      to: '#ba4c4c',
+      easing: 'linear',
+      pauseEvents: 'hit',
+    });
 
     document.querySelector('#asteroids').appendChild(ast);
     if (this.timeout !== null) {

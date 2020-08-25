@@ -15,7 +15,7 @@ function setupExplosion(geometry) {
     }
   }
 
-  geometry.addAttribute('displacement', new AFRAME.THREE.BufferAttribute(displacement, 3));
+  geometry.setAttribute('displacement', new AFRAME.THREE.BufferAttribute(displacement, 3));
   return geometry;
 }
 
@@ -35,6 +35,7 @@ function distortedSphereGeometry(radius, widthSegments, heightSegments) {
   return geometry;
 }
 
+
 AFRAME.registerGeometry('asteroid', {
   init: function() {
     var finalGeometry = distortedSphereGeometry(random(1.0, 1.5, true), 20, 10);
@@ -53,3 +54,5 @@ AFRAME.registerGeometry('asteroid', {
     this.geometry = setupExplosion(finalGeometry);
   }
 });
+
+console.log(AFRAME.geometries);

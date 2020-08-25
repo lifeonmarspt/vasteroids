@@ -24,15 +24,14 @@ AFRAME.registerComponent('asteroid', {
     this.el.removeEventListener("hit", this.hitListener);
     this.el.setAttribute("material", "shader: asteroid-explosion;");
 
-    var explosion = document.createElement('a-animation');
-    explosion.setAttribute('dur', '300');
-    explosion.setAttribute('attribute', 'material.amplitude');
-    explosion.setAttribute('fill', 'forwards');
-    explosion.setAttribute('easing', 'linear');
-    explosion.setAttribute('to', '0.8');
+    this.el.setAttribute("animation", {
+      property: 'material.amplitude',
+      dur: 300,
+      easing: 'linear',
+      to: 0.8,
+    });
 
-    this.el.appendChild(explosion);
-    this.el.addEventListener("animationend", () => { this.disappear(); }, false);
+    this.el.addEventListener("animationcomplete", () => { this.disappear(); }, false);
   },
 
   disappear: function() {

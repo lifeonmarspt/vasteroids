@@ -5,11 +5,10 @@
   "main": "index.js",
   "dependencies": {
     "aframe": "^1.0.4",
-    "aframe-text-component": "^0.4.2",
     "lodash": "^4.17.15"
   },
   "devDependencies": {
-    "source-map-loader": "^0.1.5",
+    "source-map-loader": "^1.0.1",
     "webpack": "^4.44.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
