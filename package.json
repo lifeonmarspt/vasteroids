@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "aframe": "^1.0.4",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "source-map-loader": "^1.0.1",
