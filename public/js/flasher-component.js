@@ -1,5 +1,3 @@
-import AFRAME from 'aframe';
-
 AFRAME.registerComponent('flasher', {
   init: function() {
     this.el.setAttribute('material', 'transparent: true; opacity: 0.0;')

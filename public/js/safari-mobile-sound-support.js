@@ -8,8 +8,8 @@ function createAndPlayNoise() {
         return
     }
 
-    var buffer = THREE.AudioContext.createBuffer(1, 1, 22050);
-    var source = THREE.AudioContext.createBufferSource();
+    const buffer = THREE.AudioContext.createBuffer(1, 1, 22050);
+    const source = THREE.AudioContext.createBufferSource();
     source.buffer = buffer;
     source.connect(THREE.AudioContext.destination);
     source.play();

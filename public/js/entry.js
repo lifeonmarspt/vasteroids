@@ -1,0 +1,11 @@
+import './safari-mobile-sound-support.js';
+import './start-button-component.js';
+import './flasher-component.js';
+import './player-system.js';
+import './countdown-timer-component.js';
+import './asteroid-explosion-shader.js';
+import './asteroid-component.js';
+import './asteroid-geometry.js';
+import './distance-limiter-component.js';
+import './laser-component.js';
+import './spawner-component.js';

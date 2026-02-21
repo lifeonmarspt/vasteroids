@@ -1,8 +1,5 @@
-import AFRAME from 'aframe';
-
 AFRAME.registerComponent('start-button', {
   init: function() {
-    var self = this
     this.el.addEventListener('hit', this.startTimer.bind(this));
     this.el.addEventListener('restart', this.restart.bind(this));
   },

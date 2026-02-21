@@ -1,5 +1,3 @@
-import AFRAME from 'aframe';
-
 AFRAME.registerComponent('countdown-timer', {
   init: function() {
     var time = 0

@@ -1,4 +1,3 @@
-import AFRAME from 'aframe'
 import polar2cartesian from "./polar2cartesian.js";
 import normal_random from "./normal-random.js";
 
@@ -94,4 +93,3 @@ AFRAME.registerSystem('player', {
     }
   }
 })
-

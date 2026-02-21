@@ -1,5 +1,3 @@
-import AFRAME from 'aframe';
-
 AFRAME.registerShader('asteroid-explosion', {
   schema: {
     amplitude: {type: 'float', default: 0.0, is: 'uniform'},
