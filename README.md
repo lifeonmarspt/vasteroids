@@ -7,8 +7,4 @@ Skybox from http://likeonions.deviantart.com/art/Wormhole-Space-Equirectangular-
 
 ## Deploying
 
-```
-yarn
-yarn run webpack
-rsync -az public/ git.hugopeixoto.net:/srv/www/vasteroids.lifeonmars.pt/public/
-```
+Serve the `public/` directory via https.
